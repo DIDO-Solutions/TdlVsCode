@@ -1,0 +1,25 @@
+{
+  "name": "template-definition-language",
+  "displayName": "Template Definition Language",
+  "description": "Template Description Language (TDL) describes how a template processor interprets a template file into a target files such as C, C++, C#, JAVA, JavaScript, SQL, HTML or CSVs.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "templatedl",
+      "aliases": ["TemplateDL", "templatedl"],
+      "extensions": [".tdl",".template",".templatedl"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "templatedl",
+      "scopeName": "source.tdl",
+      "path": "./syntaxes/templatedl.tmLanguage.json"
+    }]
+  }
+}

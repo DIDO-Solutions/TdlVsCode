@@ -1,0 +1,25 @@
+{
+  "name": "template",
+  "displayName": "Template Definition Language (TDL)",
+  "description": "Teplate Definition Labnguage allows for the decorating of existing fikles with templating commands usd by a Code Generator for creating new files.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "tdl",
+      "aliases": ["templateDL", "tdl"],
+      "extensions": [".template",".tdl",".templatedl"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "tdl",
+      "scopeName": "source.templateDL",
+      "path": "./syntaxes/templateDL.tmLanguage.json"
+    }]
+  }
+}

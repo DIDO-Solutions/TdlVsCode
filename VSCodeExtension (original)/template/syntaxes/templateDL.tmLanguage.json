@@ -1,0 +1,197 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "templateDL",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#variables"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				 {
+					"name": "comment.single.line.templateDL",
+					"begin": "_//",
+					"end": "\n"
+				},
+				{
+					"name": "comment.multi.line.templateDL",
+					"begin": "_/[*]",
+					"end": "_[*]/"
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"name": "constant.character",
+					"match": "(_{|_}|_<)"
+				},
+				{
+					"name": "constant.true.boolean",
+					"match": "(?i)\\b(TRUE|YES|ON)\\b"
+				},
+				{
+					"name": "constant.false.boolean",
+					"match": "(?i)\\b(FALSE|NO|OFF)\\b"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.meta.context.templateDL",
+					"match": "(?i)\\b(_\\#DEFINE|_\\#SET|_\\#CURSOR|_\\#ECHO|_\\#INCLUDE|_\\#EOF|_\\#DUMP)\\b"
+				},
+				{
+					"name": "keyword.meta.includeFileName.templateDL",
+					"match": "(?<=(?i)_\\#INCLUDE\\s)([\\S\\-]+)"
+				},
+				{
+					"name": "keyword.meta.defineCursorType.templateDL",
+					"match": "(?<=(?i)_\\#CURSOR\\s)(\\w+\\s){2}"
+				},
+				{
+					"name": "keyword.meta.defineCursorName.templateDL",
+					"match": "(?<=(?i)_\\#CURSOR\\s)(\\w+\\s){1}"
+				},
+				{
+					"name": "keyword.meta.conditionalExpression.templateDL",
+					"match": "((?<=(?i)_\\#IF\\s)\\((.*)\\)|(?<=(?i)_\\#ELSEIF\\s)\\((.*)\\)|(?<=(?i)_\\#IFDEF\\s)\\((.*)\\)|(?<=(?i)_\\#IFNDEF\\s)\\((.*)\\)|(?<=(?i)_\\#IFSET\\s)\\((.*)\\)|(?<=(?i)_\\#IFNSET\\s)\\((.*)\\))"
+				},
+				{
+					"name": "keyword.meta.conditional.templateDL",
+					"match": "(?i)\\b(_#IF|_#ELSEIF|_#ELSE|_#ENDIF|_#IFDEF|_#IFNDEF|_#UNDEF|_#IFSET|_#IFNSET|_#UNSET|_[?])\\b"
+				},
+				{
+					"name": "keyword.meta.terminate.templateDL",
+					"match": "(?i)\\b(_\\#EXIT)\\b"
+				},
+				{
+					"name": "keyword.meta.looping.templateDL",
+					"match": "(?i)\\b(_\\#LOOP|_\\#ENDLOOP|_\\#BREAK|_\\#MOVE)\\b"
+				},
+				{
+					"name": "keyword.meta.output.templateDL",
+					"match": "(?i)\\b(_#OUTPUT|_#PUT|_#PUTLINE|_#WORDWRAP|_#WW)\\b"
+				},
+				{
+					"name": "keyword.meta.conditional.special.templateDL",
+					"match": "(_[?]|_:|\\s*_\\\\s*$)"
+				},
+				{
+					"name": "keyword.meta.macro.templateDL",
+					"match": "\\b(_#\\w+)\\b"
+				},
+				{
+					"name": "keyword.meta.defineVariableName.templateDL",
+					"match": "(?<=(?i)_\\#DEFINE\\s)([\\S\\-]+)"
+				},
+				{
+					"name": "keyword.meta.setEnvVariable.templateDL",
+					"match": "((?<=(?i)_\\#SET\\s)(ENVIRONMENT\\s)|(?<=(?i)_\\#SET\\s)(GLOBAL\\s))"
+				},
+				{
+					"name": "keyword.meta.setEnvVariableName.templateDL",
+					"match": "((?<=(?i)_\\#SET ENVIRONMENT\\s)([\\S\\-]+)|(?<=(?i)_\\#SET GLOBAL\\s)([\\S\\-]+))"
+				},
+				{
+					"name": "keyword.meta.setVariableName.templateDL",
+					"match": "(?<=(?i)_\\#SET\\s)([\\S\\-]+)"
+				},
+				{
+					"name": "keyword.meta.echoOptions.templateDL",
+					"match": "(?<=(?i)_\\#ECHO)\\s+(?i)\\b(INPUT|OUTPUT|COMMENT|RULER)\\b"
+				},
+				{
+					"name": "keyword.meta.exitCode.templateDL",
+					"match": "(?<=(?i)_\\#EXIT)\\s+(?i)\\b[0-9]*\\b(.*)\\b"
+				},
+				{
+					"name": "keyword.meta.outputOptions.templateDL",
+					"match": "(?<=(?i)_\\#OUTPUT)\\s+(?i)\\b(BEGIN|CLOSE|PAUSE|RESUME)\\b"
+				},
+				{
+					"name": "keyword.meta.templateDL",
+					"match": "(?i)\\b(_#DEFINE|_#SET|_#ECHO|_#INCLUDE|_#EOF|_#EXIT|_#IF|_#ELSIF|_#ELSE|_#ENDIF|_#CURSOR|_#LOOP|_#ENDLOOP|_#BREAK|_#MOVE|_#PUT|_#PUTLINE|_#WORDWRAP|_#WW|_#DUMP|_#IFDEF|_#IFNDEF|_#UNDEF|_#IFSET|_#IFNSET|_#UNSET|_[?])\\b"
+				},
+				{
+					"name": "keyword.meta.filePath.templateDL",
+					"match": "(?i)_#ECHO\\s"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				 {
+					"name": "string.quoted.double.templateDL",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.templateDL",
+							"match": "\\."
+						}
+					]
+				},
+				{
+					"name": "string.quoted.single.templateDL",
+					"begin": "'",
+					"end": "'",
+					"patterns": [
+						{
+							"name": "constant.character.escape.templateDL",
+							"match": "'.'"
+						}
+					]
+				},
+				{
+					"name": "string.quoted.grave.templateDL",
+					"begin": "`",
+					"end": "`",
+					"patterns": [
+						{
+							"name": "constant.character.escape.templateDL",
+							"match": "'.'"
+						}
+					]
+				},
+				{
+					"name": "string.quoted.grave.templateDL",
+					"begin": "_`",
+					"end": "_`",
+					"patterns": [
+						{
+							"name": "constant.character.escape.templateDL",
+							"match": "'.'"
+						}
+					]
+				}
+			]
+		},
+		"variables": {
+			"patterns": [
+				 {
+					"name": "variable.templateDL",
+					"match": "(_\\&(\\S*)\\.)"
+				}
+			]
+		}
+	},
+	"scopeName": "source.templatedl"
+}
+
+
+
