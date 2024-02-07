@@ -2,7 +2,7 @@
   "displayName"          : "Template Definition Language Meta-Language Support",
   "publisher"            : "DidoSolutions",
   "description"          : "Template Definition Language (TDL) uses Meta-Commands to direct as TDL Processor in how to create output based on the input.",
-  "version"              : "0.7.1",
+  "version"              : "0.8.0",
   "repository"           : "https://github.com/your-username/your-repo",
   "devDependencies"      : { "vscode"            : "^1.85.1",
                              "vsce"              : "^1.108.0"
