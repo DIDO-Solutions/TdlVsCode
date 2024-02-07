@@ -1,0 +1,9 @@
+# ignore the git instructions
+git instructions.txt
+
+# ignore extra folders
+VSCodeExtension (original)/
+VSCodeExtension/
+template/
+vscodeExtensionFIles/
+TDL/
