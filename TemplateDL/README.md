@@ -1,5 +1,5 @@
-# Welcome to your VS Code Extension
 ![Logo of the TDL code highlighter extenstion](./images/logo.png)
+# Welcome to your VS Code Extension
 
 ## What's in the folder
 
