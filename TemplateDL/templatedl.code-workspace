@@ -1,0 +1,201 @@
+{ "folders": 
+     [ { "path": "../templatedl" }
+     ],
+  "settings": 
+  { "editor.tokenColorCustomizations": 
+    { "[Visual Studio Dark]": 
+	  { "textMateRules": 
+	    [ { "scope"     : "source.templateDL constant.language",
+            "settings"  : { "foreground": "#ba9249" }
+          },
+          { "scope"     : "constant.character.escape.templateDL",
+            "settings"  : { "foreground": "#DA70D6" }
+          },
+          { "scope"     : "keyword.pseudoElement.templateDL",
+            "settings"  : { "foreground": "#dfbc2c",
+                            "fontStyle" : "bold" 
+                          } 
+          },
+          { "scope"     : "source.templateDL keyword.meta.exitCode.templateDL",
+            "settings"  : { "foreground": "#f85679" }
+          },
+          { "scope"     : "source.templateDL keyword.meta.exitMsg.templateDL",
+            "settings"  : { "foreground": "#f3889f" }
+          },
+          { "scope"     : "source.templateDL variable.templateDL",
+            "settings"  : { "foreground": "#7FFFD4"}
+          },
+          { "scope"     : "source.templateDL variable.expression.templateDL",
+            "settings"  : { "foreground": "#7fffec"}
+          },
+          { "scope"     : "source.templateDL variable.name.templateDL",
+            "settings"  : { "foreground": "#4bc47a" }
+          },
+          { "scope"     : "source.templateDL variable.name.begin.templateDL",
+            "settings"  : { "foreground": "#BCB660"}
+          },
+          { "scope"     : "source.templateDL variable.name.end.templateDL",
+            "settings"  : { "foreground": "#BCB660"}
+          },
+          { "scope"     : "source.templateDL keyword.special.templateDL",
+            "settings"  : { "foreground": "#e965d9" }
+          },
+          { "scope"     : "source.templateDL keyword.meta.conditional.templateDL",
+            "settings"  : { "foreground": "#f3b47c"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.conditional.special.templateDL",
+            "settings"  : { "foreground": "#9AA3E2"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.conditionalExpression.templateDL",
+            "settings"  : { "foreground": "#b67032"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.looping.templateDL",
+            "settings"  : { "foreground": "#9aa3e2"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.looping.move.templateDL",
+            "settings"  : { "foreground": "#c87fdf"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.looping.move.direction.templateDL",
+            "settings"  : { "foreground": "#c87fdf"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.looping.move.steps.templateDL",
+            "settings"  : { "foreground": "#b284e4"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.looping.break.templateDL",
+            "settings"  : { "foreground": "#c87fdf"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.context.templateDL",
+            "settings"  : { "foreground": "#c0a1e2" }
+          },
+          { "scope"     : "source.templateDL keyword.meta.macro.templateDL",
+            "settings"  : { "foreground": "#e484c2"  }
+          },
+          { "scope"     : "source.templateDL string.quoted.single.templateDL",
+            "settings"  : { "foreground": "#f5c75c"}
+          },
+          { "scope"     : "source.templateDL string.quoted.double.templateDL",
+            "settings"  : { "foreground": "#dca552"}
+          },
+          { "scope"     : "source.templateDL string.quoted.grave.templateDL",
+            "settings"  : { "foreground": "#b88a45"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.echoOptions.templateDL",
+            "settings"  : { "foreground": "#8a7deb"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.output.templateDL",
+            "settings"  : { "foreground": "#FA8072"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.output.text.templateDL",
+            "settings"  : { "foreground": "#f7bd5a"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.output.options.templateDL",
+            "settings"  : { "foreground": "#FFBF7A"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.output.options.begin.templateDL",
+            "settings"  : { "foreground": "#66e8e5"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.output.options.pause.templateDL",
+            "settings"  : { "foreground": "#d7de0f"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.output.options.resume.templateDL",
+            "settings"  : { "foreground": "#4dde0f"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.output.options.close.templateDL",
+            "settings"  : { "foreground": "#de510f"}
+          },
+          { "scope"     : "keyword.meta.textMsg.templateDL",
+            "settings"  : { "foreground": "#31cdb6"}
+          },
+          { "scope"     : "source.templateDL meta.terminate.templateDL",
+            "settings"  : { "foreground": "#e07bc8"}
+          },
+          { "scope"     : "source.templateDL constant.true.boolean",
+            "settings"  : { "foreground": "#74e1bb"}
+          },
+          { "scope"     : "source.templateDL constant.false.boolean",
+            "settings"  : { "foreground": "#ef9555"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.define.templateDL",
+            "settings"  : { "foreground": "#ee1111"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.undefine.templateDL",
+            "settings"  : { "foreground": "#8545ce"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.defineVariableName.templateDL",
+            "settings"  : { "foreground": "#4BC47A" }
+          },
+          { "scope"     : "source.templateDL keyword.meta.defineVariableValue.templateDL",
+            "settings"  : { "foreground": "#66c5c5" }
+          },
+          { "scope"     : "source.templateDL keyword.meta.EnvVariableName.templateDL",
+            "settings"  : { "foreground": "#6dd0cf"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.setVariableName.templateDL",
+            "settings"  : { "foreground": "#6dd0cf"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.setEnvVariableName.templateDL",
+            "settings"  : { "foreground": "#6dd0cf"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.setEnvContext.templateDL",
+            "settings"  : { "foreground": "#cc63e9"}
+          },
+          { "scope"     : "source.templateDL keyword.uri.templateDL",
+            "settings"  : { "foreground": "#4292d2",
+            "fontStyle" :"underline" }
+          },
+          { "scope"     : "source.templateDL keyword.meta.includeArguments.templateDL",
+            "settings"  : { "foreground": "#66CDAA"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.includeArguments.item.templateDL",
+            "settings"  : { "foreground": "#66CDAA"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.includeArguments.name.templateDL",
+            "settings"  : { "foreground": "#66FAA0"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.includeArguments.assignOP.templateDL",
+            "settings"  : { "foreground": "#DA70D6"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.includeArguments.value.templateDL",
+            "settings"  : { "foreground": "#87CEFA"}
+          },
+          { "scope"     : "source.templateDL variable.pseudo.operation.name.templateDL",
+            "settings"  : { "foreground": "#37f07e"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.hostCmd.text.templateDL",
+            "settings"  : { "foreground": "#f1e57a"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.hostCmd.indicator.templateDL",
+            "settings"  : { "foreground": "#bcb660"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.hostCmd.text.templateDL",
+            "settings"  : { "foreground": "#FAFAD2"}
+          },
+          { "scope"     : "source.templateDL keyword.meta.continue.templateDL",
+            "settings"  : { "foreground": "#ce2b2b"}
+          },
+          { "scope"     : "javascript.numbers",
+            "settings"  : { "foreground": "#f48549"}
+          },
+          { "scope"     : "javascript.operators",
+            "settings"  : { "foreground": "#b088e5"}
+          },
+          { "scope"     : "javascript.varNames",
+            "settings"  : { "foreground": "#4BC47A"}
+          },
+          { "scope"     : "javascript.true.booleanValue",
+            "settings"  : { "foreground": "#74e1bb"}
+          },
+          { "scope"     : "javascript.false.booleanValue",
+            "settings"  : { "foreground": "#ef9555"}
+          },
+          { "scope"     : "keyword.meta.function.templateDL",
+            "settings"  : { "foreground": "#f6f687"}
+          },
+          { "scope"     : "keyword.meta.argList.templateDL",
+            "settings"  : { "foreground": "#87f69a"}
+          }
+        ]
+      }
+    }
+  }
+}
