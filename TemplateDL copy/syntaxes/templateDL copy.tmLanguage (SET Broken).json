@@ -10,13 +10,9 @@
     },
     { "include"    : "#strings"
     },
-    { "include"    : "#uris"
-    },
     { "include"    : "#variables"
     },
     { "include"    : "#variablePattern"
-    },
-    { "include"    : "#uriPattern"
     }
   ],
   "repository"     : 
@@ -57,40 +53,18 @@
     "hostCmdPattern": {
       "patterns": [
         { "name": "source.templateDL keyword.meta.hostCmd.text.templateDL",
-          "patterns" :
-           [ { "include"  : "#strings" },
-             { "include"  : "#variablePattern" },
-             { "include"  : "#operators" },
-             { "include"  : "#functionNames" },
-             { "include"  : "#booleanTrueValues" },
-             { "include"  : "#booleanFalseValues" },
-             { "include"  : "#variableNames" },
-             { "include"  : "#numerics" }
-           ]
-        }
-      ]
-    },
-    "uriPattern": {
-      "patterns": [
-        { "name": "source.templateDL keyword.uri.templateDL",
-          "patterns":
-          [ { "include"  : "#variables" },
-            { "include"  : "#strings" },
-            { "include"  : "#hostCmdPattern" }
+          "patterns": [
+            { "include": "#variables" },
+            { "include": "#strings" }
           ]
         }
       ]
-    },
+    },       
     "comments"     : 
     { "patterns"   : 
       [ { "name"   : "comment.single.line.templateDL",
           "begin"  : "_//",
-          "end"    : "\n",
-          "patterns":
-          [ { "include"  : "#variables" },
-            { "include"  : "#strings" },
-            { "include"  : "#hostCommands" }
-          ]
+          "end"    : "\n"
         },
         { "name"   : "comment.multi.line.templateDL",
           "begin"  : "_/[*]",
@@ -98,40 +72,6 @@
         }
       ]
     },
-    "numerics" :
-    { "name" : "constant.math.numbers",
-      "match" : "([+\\-\\.0-9])"
-    },
-    "operators" :
-    { "name" : "constant.math.operators",
-      "match" : "([=\\+\\-\/\\^\\*\\%\\.<>!|&])"
-    },
-    "booleanTrueValues" :
-    { "name" : "constant.math.true.booleanValue",
-      "match" : "\\b(true|1)\\b"
-    },
-    "booleanFalseValues" :
-    { "name" : "constant.math.false.booleanValue",
-      "match" : "\\b(false|0)\\b"
-    },
-    "functionNames" :
-    { "name": "keyword.meta.function.templateDL",
-    "match": "\\b(toValidNameChars|center|padLeft|padRight|trim|trimLeft|trimRight|toTitleCase|toLowerCase|toUpperCase|toLowerSnakeCase|toUpperSnakeCase|toTitleSnakeCase|toUpperCamelCase|toLowerCamelCase|toKebabCase|toLowerKebabCase|toUpperKebabCase|isNumeric|isNull|isUndefined|isEmpty|isUsable|isInitialized|coalesce)\\b"
-    },
-    "variableNames" :
-    { "name" : "constant.math.varNames",
-      "match" : "\\b[a-zA-Z_][a-zA-Z_0-9]*\\b"
-    },
-    "argumentList": 
-    {
-      "name": "keyword.meta.argList.templateDL",
-      "match": "(\\b[a-zA-Z_][a-zA-Z_0-9]*)(?:\\s*(=)\\s*('[^']*'|\"[^\"]*\"|\\S+))?",
-      "captures": {
-          "1": { "name": "keyword.meta.defineVariableName.templateDL" },
-          "2": { "name": "constant.math.operators" },
-          "3": { "name": "keyword.meta.defineVariableValue.templateDL" }
-      }
-  },
     "constants"    : 
     { "patterns"   : 
       [ { "name"   : "constant.character",
@@ -150,37 +90,40 @@
       [ { "name"   : "keyword.meta.include.templateDL",
           "match"  : "_#INCLUDE\\s+([^\\s]+)\\s*([\\s\\S]*?)(?=\\s*\\b_#INCLUDE\\b|$)",
           "captures": 
-          { "1" : { "name"         : "keyword.uri.templateDL",
-                    "patterns"     : [ { "include" : "#uris" } ] 
+          { "1" : { "name"     : "keyword.meta.fileSpecification.templateDL",
+                    "patterns" : 
+                    [ { "include": "#definitions/keyword.meta.includeArguments.item.templateDL" }
+                    ]
                   },
             "2":  { "name"         : "keyword.meta.includeArguments.templateDL",
-                    "patterns"     :  
-                    [ { "include"  : "#strings" },
-                     { "include"  : "#variablePattern" },
-                     { "include"  : "#operators" },
-                     { "include"  : "#functionNames" },
-                     { "include"  : "#booleanTrueValues" },
-                     { "include"  : "#booleanFalseValues" },
-                     { "include"  : "#variableNames" },
-                     { "include"  : "#numerics" }
-                   ]
+                    "patterns"     : 
+                    [ { "name"     : "keyword.meta.includeArguments.item.templateDL",
+                        "match"    : "\\b(\\w+)\\b"
+                      },
+                      { "name"     : "keyword.meta.includeArguments.assignOP.templateDL",
+                        "match"    : "\\s*=\\s*"
+                      },
+                      { "name"     : "keyword.meta.includeArguments.value.templateDL",
+                        "begin"    : "([\"'])?([^\"'\\s]+)\\1(?=\\s|$)",
+                        "end"      : "\\1(?=\\s|$)",
+                        "patterns" : 
+                        [ { "name" : "constant.character.escape.templateDL",
+                            "match": "\\."
+                          }
+                        ]
+                      }
+                    ]
                  }
            }
-        },
+         },
         { "name": "keyword.meta.hostCmd.templateDL",
           "match": "(_<)(.*?)(_\\<)",
           "captures":
           { "1": { "name": "keyword.meta.hostCmd.indicator.templateDL" },
             "2": { "name": "keyword.meta.hostCmd.text.templateDL",
-                   "patterns" :
-                   [ { "include"  : "#strings" },
-                     { "include"  : "#variablePattern" },
-                     { "include"  : "#operators" },
-                     { "include"  : "#functionNames" },
-                     { "include"  : "#booleanTrueValues" },
-                     { "include"  : "#booleanFalseValues" },
-                     { "include"  : "#variableNames" },
-                     { "include"  : "#numerics" }
+                   "patterns": 
+                   [ { "include" : "#variables" },
+                     { "include" : "#strings" }
                    ]
                  },
             "3": { "name": "keyword.meta.hostCmd.indicator.templateDL" }
@@ -199,19 +142,7 @@
           "match": "^\\s*\\b(_\\#IF|_\\#ELSEIF|_[?])\\s+(.*)$",
           "captures" : {
           "1" : { "name" : "keyword.meta.conditional.templateDL" },
-          "2" : { "name" : "keyword.meta.hostCmd.text.templateDL",
-                  "patterns" : 
-                      [ {"include"   : "#hostCommands" },
-                        { "include"  : "#strings" },
-                        { "include"  : "#variablePattern" },
-                        { "include"  : "#operators" },
-                        { "include"  : "#functionNames" },
-                        { "include"  : "#booleanTrueValues" },
-                        { "include"  : "#booleanFalseValues" },
-                        { "include"  : "#variableNames" },
-                        { "include"  : "#numerics" }
-                     ]
-                }
+          "2" : { "name" : "keyword.meta.hostCmd.text.templateDL" }
           }
         },
         { "name": "keyword.meta.conditional.templateDL",
@@ -264,83 +195,44 @@
           "match"       : "\\b(_#(?!BREAK|CURSOR|DUMP|DEBUG|TRACE|DEFINE|ECHO|EOF|ENDIF|EXIT|IF|IFDEF|IFNDEF|IFSET|IFNSET|ENDIF|ELSEIF|ELSE|INCLUDE|LOOP|ENDLOOP|{|}|MOVE|OUTPUT|PUT|PUTLINE|SET|WW)\\w+)\\b"
         },
         { "name"        : "keyword.meta.define.templateDL",
-          "match"       : "(?<=(_\\#DEFINE\\s))([A-Za-z0-9_&\\.\\<]+)?([:]{2})?\\s*?([A-Za-z0-9_]+)?\\s*(.*)?$",
+          "match"       : "(?<=(_\\#DEFINE\\s))([A-Za-z0-9_]+)?([:]{2})?\\s*?([A-Za-z0-9_]+)?\\s*(.*)?$",
           "captures"    :
-          { "2": { "name" : "keyword.meta.defineVariableName.templateDL" ,
-                   "patterns" : 
-                   [ {"include": "#hostCommands" } ]
-                 },
-            "3": { "name" : "keyword.pseudoElement.templateDL" },
-            "4": { "name" : "variable.pseudo.operation.name.templateDL" },
-            "5": { "name" : "keyword.meta.defineVariableValue.templateDL",
-                   "patterns" : 
-                   [ {"include": "#hostCommands" } ]
-                 }
-          }
-        },
-        { "name"     : "keyword.meta.define.templateDL",
-          "match"    : "(?<=_\\#SET\\s)\\s*(TYPE)\\s*(.*)",
-          "captures" : {
-            "1": { "name" : "keyword.meta.context.templateDL" },
-            "2": { "name" : "keyword.uri.templateDL",
-                   "patterns" : [ { "include" : "#uris" }
-                                ] 
-                  }
-          }
-        },
-        { "name": "keyword.meta.define.templateDL",
-          "match": "(?<=(_\\#SET\\s))\\s*(ENVIRONMENT|GLOBAL)?\\s*([A-Za-z0-9_&\\.\\<]+)?([:]{2})?\\s*?([A-Za-z0-9_]+)?\\s*(.*)?$",
-          "captures":
-          { "1": { "name" : "keyword.meta.define.templateDL" },
-            "2": { "name" : "keyword.meta.context.templateDL" },
-            "3": { "name" : "keyword.meta.defineVariableName.templateDL" ,
-                   "patterns" : 
-                    [ {"include": "#hostCommands" } ]
-                 },
-            "4": { "name" : "keyword.pseudoElement.templateDL" },
-            "5": { "name" : "variable.pseudo.operation.name.templateDL" },
-            "6": { "name" : "keyword.meta.defineVariableValue.templateDL",
-                   "patterns" : 
-                     [ {"include": "#hostCommands" } ]
-                 }
-          }
-        },
-        { "name"     : "keyword.meta.define.templateDL",
-          "match"    : "(?<=(_\\#SET\\s))\\s*([A-Za-z0-9_&\\.\\<]+)?([:]{2})?\\s*?([A-Za-z0-9_]+)?\\s*(.*)?$",
-          "captures" :
-            { "2": { "name" : "keyword.meta.defineVariableName.templateDL" ,
-                     "patterns" : 
-                       [ {"include": "#hostCommands" } ]
-                   },
+            { "2": { "name" : "keyword.meta.defineVariableName.templateDL" },
               "3": { "name" : "keyword.pseudoElement.templateDL" },
+              "4": { "name" : "variable.pseudo.operation.name.templateDL" },
+              "5": { "name" : "keyword.meta.defineVariableValue.templateDL",
+                     "patterns" : 
+                     [ {"include": "#hostCmdPattern" } ]
+                   }
+            }
+        },
+        { "name"     : "keyword.meta.define.templateDL",
+          "match"    : "(?<=(_\\#SET\\s))\\s*([A-Za-z0-9_]+)?([:]{2})?\\s*?([A-Za-z0-9_]+)?\\s*(.*)?$",
+          "captures" :
+            { "2": { "name" : "keyword.meta.defineVariableName.templateDL" },
+              "3": { "name" : "keyword.meta.pseudoElement.templateDL" },
               "4": { "name" : "variable.pseudo.operation.name.templateDL" },
               "5": { "name" : "keyword.meta.defineVariableValue.templateDL" }
             }
         },
         { "name": "keyword.meta.setVariableName.templateDL",
-          "match": "(?<=_\\#SET\\s)\\b(?!ENVIRONMENT|GLOBAL)\b\\s+([A-Za-z0-9_&\\.\\<]+)?([:]{2})?\\s*?([A-Za-z0-9_]+)?\\s+(.*)$",
+          "match": "(?<=_\\#SET\\s)\\b(?!ENVIRONMENT|GLOBAL)\b\\s+([A-Za-z0-9_]+)?([:]{2})?\\s*?([A-Za-z0-9_]+)?\\s+(.*)$",
           "captures" : 
-            { "2" : { "name" : "keyword.meta.defineVariableName.templateDL"  ,
-                      "patterns" : 
-                       [ {"include": "#hostCommands" } ]
-                    },
-              "3" : { "name" : "keyword.pseudoElement.templateDL"  },
+            { "2" : { "name" : "keyword.meta.defineVariableName.templateDL"  },
+              "3" : { "name" : "keyword.meta.pseudoElement.templateDL"  },
               "4" : { "name" : "variable.pseudo.operation.name.templateDL" },
               "5" : { "name" : "keyword.meta.defineVariableValue.templateDL",
                       "patterns" : 
-                      [ {"include": "#hostCommands" } ]
+                      [ {"include": "#hostCmdPattern" } ]
                     }
             }
         },
         { "name": "keyword.meta.setVariableName.templateDL",
-          "match": "(?<=_\\#SET\\s)\\s*?(ENVIRONMENT|GLOBAL)?\\s+([A-Za-z0-9__&\\.\\<]+)?([:]{2})?\\s*?([A-Za-z0-9_]+)?\\s+(.*)$",
+          "match": "(?<=_\\#SET\\s)\\s*?(ENVIRONMENT|GLOBAL)?\\s+([A-Za-z0-9_]+)?([:]{2})?\\s*?([A-Za-z0-9_]+)?\\s+(.*)$",
           "captures" : 
             { "2" : { "name" : "keyword.meta.context.templateDL"  },
-              "3" : { "name" : "keyword.meta.defineVariableName.templateDL" ,
-                      "patterns" : 
-                        [ {"include": "#hostCommands" } ]
-                    },
-              "4" : { "name" : "keyword.pseudoElement.templateDL"  },
+              "3" : { "name" : "keyword.meta.defineVariableName.templateDL"  },
+              "4" : { "name" : "keyword.meta.pseudoElement.templateDL"  },
               "5" : { "name" : "variable.pseudo.operation.name.templateDL" },
               "6" : { "name" : "keyword.meta.defineVariableValue.templateDL" }
             }
@@ -364,10 +256,7 @@
                   },
             "4" : { "name" : "keyword.meta.textMsg.templateDL",
                     "patterns" : 
-                      [ {"include": "#hostCommands" },
-                        { "include": "#strings" },
-                        { "include": "#variablePattern" }
-                     ]
+                      [ {"include": "#hostCmdPattern" } ]
                   }
           }
         },
@@ -390,9 +279,9 @@
           "match": "(?<=(_\\#OUTPUT\\s))\\s*(BEGIN)\\s*(.*)?",
           "captures":
           { "2": { "name" : "keyword.meta.output.options.begin.templateDL" },
-            "3": { "name" : "keyword.uri.templateDL",
+            "3": { "name" : "keyword.meta.fileSpecification.templateDL",
                    "patterns" : 
-                    [ {"include": "#hostCommands" } ]
+                    [ {"include": "#hostCmdPattern" } ]
                  }
           }
         },
@@ -431,74 +320,31 @@
           "begin"       : "'",
           "end"         : "'",
           "patterns" : 
-          [ { "include" : "#variables" },
-            { "include" : "#hostCommands" }
-          ]
+          [ { "include" : "#variables" } ]
         },
         { "name": "string.quoted.double.templateDL",
           "begin": "\"",
           "end": "\"",
           "patterns" : 
-          [ { "include" : "#variables" },
-            { "include" : "#hostCommands" } ]
+          [ { "include" : "#variables" } ]
         },
         { "name": "string.quoted.grave.templateDL",
           "begin": "`",
           "end": "`",
           "patterns" : 
-          [ { "include" : "#variables" },
-            { "include" : "#hostCommands" } ]
+          [ { "include" : "#variables" } ]
         },
         { "name": "string.quoted.grave.templateDL",
           "begin": "_`",
           "end": "_`",
           "patterns" : 
-          [ { "include" : "#variables" },
-            { "include" : "#hostCommands" } ]
+          [ { "include" : "#variables" } ]
         }
-      ]
-    },
-    "uris": 
-    { "patterns": 
-      [ { "name"        : "keyword.uri.templateDL",
-          "begin"       : "'",
-          "end"         : "'",
-          "patterns" : 
-          [ { "include" : "#variables" },
-            { "include" : "#hostCommands" }
-          ]
-        },
-        { "name": "keyword.uri.templateDL",
-          "begin": "\"",
-          "end": "\"",
-          "patterns" : 
-          [ { "include" : "#variables" },
-            { "include" : "#hostCommands" } ]
-        },
-        { "name": "keyword.uri.templateDL",
-          "begin": "`",
-          "end": "`",
-          "patterns" : 
-          [ { "include" : "#variables" },
-            { "include" : "#hostCommands" } ]
-        },
-        { "name": "keyword.uri.templateDL",
-          "begin": "_`",
-          "end": "_`",
-          "patterns" : 
-          [ { "include" : "#variables" },
-            { "include" : "#hostCommands" } ]
-        },
-        { "patterns": 
-        [ { "include": "#strings" },
-          { "include": "#variablePattern" }
-        ]
-      }
       ]
     },
     "variables": {
       "name": "variable.templateDL",
-      "match": "(_&.*?)(\\.)(?![\\.])",
+      "match": "(_&.*?)(\\.)(?!\\w)",
       "captures": {
           "1": { "name": "source.templateDL variable.expression.templateDL",
                  "patterns":
@@ -506,30 +352,6 @@
                },
           "2": { "name": "variable.name.end.templateDL" }
       }
-   },
-   "hostCommands":
-     { "name"     : "variable.templateDL",
-       "match"    : "(_<)(.*)(_<)",
-       "captures" : 
-       { "1": { "name": "keyword.meta.hostCmd.indicator.templateDL" },
-         "2": { "name": "keyword.meta.hostCmd.text.templateDL",
-                "patterns": 
-                [ { "include"  : "#strings" },
-                  { "include"  : "#variablePattern" },
-                  { "include"  : "#operators" },
-                  { "include"  : "#functionNames" },
-                  { "include"  : "#booleanTrueValues" },
-                  { "include"  : "#booleanFalseValues" },
-                  { "include"  : "#variableNames" },
-                  { "include"  : "#numerics" }
-               ]
-              },
-         "3": { "name": "keyword.meta.hostCmd.indicator.templateDL" }
-       }
-    },
-    "continuation" :
-    { "name" : "keyword.meta.continue.templateDL",
-      "match" : "(?<=(_\\))"
-    }
+   }         
   }
 }
