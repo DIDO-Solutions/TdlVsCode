@@ -1,0 +1,365 @@
+{
+	"folders": [
+		{
+			"path": "TDL"
+		}
+	],
+	"settings": {"editor.tokenColorCustomizations": {
+    "[Visual Studio Dark]": {
+      "textMateRules": [
+        {
+          "scope": "source.templateDL constant.language",
+          "settings": {
+            "foreground": "#ba9249"
+          }
+        },
+        {
+          "scope": "constant.character.escape.templateDL",
+          "settings": {
+            "foreground": "#DA70D6"
+          }
+        },
+        {
+          "scope": "keyword.meta.pseudoElement.templateDL",
+          "settings": {
+            "foreground": "#b8c85c"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.exitCode.templateDL",
+          "settings": {
+            "foreground": "#f85679"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.exitMsg.templateDL",
+          "settings": {
+            "foreground": "#db7a8f"
+          }
+        },
+        {
+          "scope": "source.templateDL variable.templateDL",
+          "settings": {
+            "foreground": "#b3a8c1",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL variable.4.templateDL",
+          "settings": {
+            "foreground": "#7FFFD4",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.special.templateDL",
+          "settings": {
+            "foreground": "#e965d9"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.conditional.templateDL",
+          "settings": {
+            "foreground": "#f3b47c",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.conditional.special.templateDL",
+          "settings": {
+            "foreground": "#9AA3E2",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.conditionalExpression.templateDL",
+          "settings": {
+            "foreground": "#b67032",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.looping.templateDL",
+          "settings": {
+            "foreground": "#9aa3e2",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.looping.move.templateDL",
+          "settings": {
+            "foreground": "#c87fdf",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.looping.move.direction.templateDL",
+          "settings": {
+            "foreground": "#c87fdf",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.looping.move.steps.templateDL",
+          "settings": {
+            "foreground": "#b284e4",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.looping.break.templateDL",
+          "settings": {
+            "foreground": "#c87fdf",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.context.templateDL",
+          "settings": {
+            "foreground": "#b284e4",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.macro.templateDL",
+          "settings": {
+            "foreground": "#e484c2",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL variable.templateDL",
+          "settings": {
+            "foreground": "#8fd2d1",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL string.quoted.grave.templateDL",
+          "settings": {
+            "foreground": "#CE9178",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL string.quoted.single3.templateDL",
+          "settings": {
+            "foreground": "#d1734e",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL string.quoted.double.templateDL",
+          "settings": {
+            "foreground": "#bf6c4b",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.echoOptions.templateDL",
+          "settings": {
+            "foreground": "#8a7deb",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.output.templateDL",
+          "settings": {
+            "foreground": "#FA8072",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.output.text.templateDL",
+          "settings": {
+            "foreground": "#f7bd5a",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.output.options.templateDL",
+          "settings": {
+            "foreground": "#FFBF7A",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.output.options.begin.templateDL",
+          "settings": {
+            "foreground": "#66e8e5",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.output.options.pause.templateDL",
+          "settings": {
+            "foreground": "#d7de0f",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.output.options.resume.templateDL",
+          "settings": {
+            "foreground": "#4dde0f",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.output.options.close.templateDL",
+          "settings": {
+            "foreground": "#de510f",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL meta.terminate.templateDL",
+          "settings": {
+            "foreground": "#e07bc8",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL constant.true.boolean",
+          "settings": {
+            "foreground": "#74e1bb",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL constant.false.boolean",
+          "settings": {
+            "foreground": "#ef9555",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.define.templateDL",
+          "settings": {
+            "foreground": "#ee1111",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.undefine.templateDL",
+          "settings": {
+            "foreground": "#8545ce",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.defineVariableName.templateDL",
+          "settings": {
+            "foreground": "#00CED1",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.defineVariableValue.templateDL",
+          "settings": {
+            "foreground": "#7FFFD4",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.EnvVariableName.templateDL",
+          "settings": {
+            "foreground": "#6dd0cf",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.setVariableName.templateDL",
+          "settings": {
+            "foreground": "#6dd0cf",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.setEnvVariableName.templateDL",
+          "settings": {
+            "foreground": "#6dd0cf",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.setEnvContext.templateDL",
+          "settings": {
+            "foreground": "#cc63e9",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.fileSpecification.templateDL",
+          "settings": {
+            "foreground": "#4682B4",
+            "fontStyle": "bold underline"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.includeArguments.templateDL",
+          "settings": {
+            "foreground": "#66CDAA",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.includeArguments.item.templateDL",
+          "settings": {
+            "foreground": "#66CDAA",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.includeArguments.name.templateDL",
+          "settings": {
+            "foreground": "#66FAA0",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.includeArguments.assignOP.templateDL",
+          "settings": {
+            "foreground": "#DA70D6",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.includeArguments.value.templateDL",
+          "settings": {
+            "foreground": "#87CEFA",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL variable.pseudo.operation.name.templateDL",
+          "settings": {
+            "foreground": "#8f9c47",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.hostCmd.text.templateDL",
+          "settings": {
+            "foreground": "#F0E68C",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.hostCmd.indicator.templateDL",
+          "settings": {
+            "foreground": "#BDB76B",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "source.templateDL keyword.meta.hostCmd.text.templateDL",
+          "settings": {
+            "foreground": "#FAFAD2",
+            "fontStyle": "bold"
+          }
+        }
+      ]
+    }
+  }}
+	
+}
