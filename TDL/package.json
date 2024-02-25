@@ -1,0 +1,40 @@
+{ "name"                 : "template-definition-language",
+  "displayName"          : "Template Definition Language Meta-Language Support",
+  "publisher"            : "DidoSolutions",
+  "description"          : "Template Definition Language (TDL) uses Meta-Commands to direct as TDL Processor in how to create output based on the input.",
+  "version"              : "0.7.1",
+  "repository"           : "https://github.com/your-username/your-repo",
+  "devDependencies"      : { "vscode"            : "^1.85.1",
+                             "vsce"              : "^1.108.0"
+                           },
+  "scripts"              : { "package"            : "vsce package" },
+  "engines"              :  { "vscode"            : "^1.85.1",
+                              "node"              : "^16.17.0" 
+                            },
+  "categories"           : [ "Programming Languages"],
+  "files.associations"   : { "*.tdl"              : "templateDL",
+                             "*.template"         : "templateDL",
+                             "*.templateDL"       : "templateDL"
+                           },
+  "contributes"          : { "languages"           : 
+                              [ { "id"             : "templateDL",
+                                  "aliases"        : ["TDL Programming Language", "templateDL", "TDL"],
+                                  "extensions"     : ["templateDL", "template", "tdl"],
+                                  "configuration"  : "./language-configuration.json"
+                                }
+                              ],
+                              "grammars"           : 
+                              [ { "language"       : "templateDL",
+                                  "scopeName"      : "source.templateDL",
+                                  "path"           : "./syntaxes/templateDL.tmLanguage.json"
+                                }
+                              ]
+                            },
+                            "themes": [
+                              { "label": "TemplateDL Dark Theme",
+                                "uiTheme": "vs-dark",
+                                "path": "./themes/templateDL-theme-dark.json"
+                              }
+                          ],
+    "configuration"     : "./.vscode/settings.json"
+}

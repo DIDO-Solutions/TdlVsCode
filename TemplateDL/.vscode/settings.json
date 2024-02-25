@@ -1,10 +1,10 @@
-{
-	"folders": [
-		{
-			"path": "TDL"
-		}
-	],
-	"settings": {"editor.tokenColorCustomizations": {
+{ "editor.tabSize": 4,
+  "editor.insertSpaces": true, 
+  "files.exclude": 
+    { "**/.git": true, 
+      "**/.DS_Store": true 
+    }, 
+  "editor.tokenColorCustomizations": {
     "[Visual Studio Dark]": {
       "textMateRules": [
         {
@@ -34,7 +34,7 @@
         {
           "scope": "source.templateDL keyword.meta.exitMsg.templateDL",
           "settings": {
-            "foreground": "#db7a8f"
+            "foreground": "#f3889f"
           }
         },
         {
@@ -360,6 +360,5 @@
         }
       ]
     }
-  }}
-	
+  }
 }

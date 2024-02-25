@@ -1,0 +1,1022 @@
+_#INCLUDE Templates/CommonDef.tdl a=b c d='test 1'
+_#DEFINE targetSwLang:: Language: _&Java. _<test ( 'hello _&name. ') _<
+_#DEFINE targetSwLang Java
+_#DEFINE Target_Package_Name:: Geometry
+_#SET myVariable this is a test _&Java.
+_#SET myVariable:: this is a test
+_#SET myVariable::toLowerCase this is a test _&Java.
+_#SET TYPE Data/_&Target_Package_Name::LowerSnakeCase._domains.csv
+_#SET GLOBAL myVar::toLowerCase my variable _&Java.
+_#SET ENVIRONMENT myVar my variable 
+_#MYMACRO 
+_#EOF
+_// ===== DUMP ENVIRONMENT
+_#DUMP ENVIRONMENT 
+_// ===== DUMP SETTINGS
+_#DUMP SETTINGS
+_// ===== DUMP STACK ( same as LOCAL )
+_#DUMP STACK 
+_// ===== DUMP MACROS
+_#DUMP MACROS
+_// ===== DUMP CURSORS
+_#DUMP CURSORS
+_// ===== DUMP ALL
+_#DUMP ALL
+_#DEBUG ON
+_#TRACE OFF
+
+_#ECHO INPUT TRUE testing one two three
+_#ECHO OUTPUT NO
+_#ECHO RULER
+_#ECHO This is a statement
+ON OFF
+Varibale is: _&targetSwLang::toLowerCase. 
+trim ( "_&Target_Entity_Name." )
+
+
+
+
+_&targetSwLang::toLowerCase.
+_#OUTPUT BEGIN Results/geometry/junk.out
+_#OUTPUT PAUSE
+_#OUTPUT RESUME
+_#OUTPUT CLOSE
+_#PUT This line of text
+_#PUTLINE This line of test
+
+_// ================-=-=-=-=-=-=-=-=-=-=
+_// Target_Package_Name _&Target_Package_Name.
+_// ================-=-=-=-=-=-=-=-=-=-=
+
+_#ECHO INPUT OFF
+_#ECHO OUTPUT OFF
+_#ECHO This is a test
+_#LOOP Domain_List
+  _#DEFINE Domain_Name:: _&Domain_Name. _<trim('hellow world')_<
+  _#DEFINE Domain_Kind:: _&Domain_Kind.
+  _#DEFINE targetSwType:: _&_&Domain_Name::CamelCase.::_&targetSwLang..
+  _#UNDEFINE Domain_Name
+  _#UNSET Domain_Name
+  _#BREAK
+  _#MOVE +100
+  "_&myVariable." row. this is it
+  _&myVariable::lowerCase.
+  '_&mvariable.'
+  `test _&test::lowerCase. _&test. you`
+  _`test _&test. _`
+
+  trim ( "_&Target_Entity_Name." ) ) &&  row.Implementation 
+
+  _// ========================================================
+  _// Schema_Name       : _&Schema_Name.
+  _// Package_Name      : _&Package_Name.
+  _// Domain_Name       : _&Domain_Name.
+  _#DEFINE Concept_Type:: _&Concept_Type.
+  _#DEFINE KindOfDomain _&Domain_Kind::UpperSnakeCase.
+  '_&test.'
+  _// ===== START: _&Domain_Name. ==> _&KindOfDomain.
+  _#IFDEF Concept_Type
+  _#ENDIF
+  _#IF '_&KindOfDomain.' === 'ENUM'
+    _// ---------- START: Generating Package: _&Target_Package_Name. ENUM Domain: _&Domain_Name. _&Concept_Type::UpperSnakeCase. ----------
+    _#INCLUDE Templates/JavaEnum.tdl _\
+          Target_Package_Name="_&Target_Package_Name." _\
+          Target_Domain_Name="_&Domain_Name."
+    _// ---------- FINISH: Generating Package: _&Target_Package_Name. ENUM Domain: _&Domain_Name. _&Concept_Type::UpperSnakeCase. ----------
+  _#ELSEIF "_&KindOfDomain." === 'SCALAR'
+    _// ---------- START: Generating Package: _&Target_Package_Name. SCALAR _&KindOfDomain. Domain: _&Domain_Name. _&Concept_Type::UpperSnakeCase. ----------
+    _#INCLUDE Templates/JavaScalarTypes.tdl _\
+          Target_Package_Name="_&MyTarget_Package_Name." _\
+          Target_Domain_Name="_&Domain_Name."
+    _// ---------- FINISH: Generating Package: _&Target_Package_Name. SCALAR _&KindOfDomain. Domain: _&Domain_Name. _&Concept_Type::UpperSnakeCase. ----------
+  _#ELSE
+  hjshihhas
+  _#ENDIF
+  _// ===== END: _&Domain_Name. ==> _&KindOfDomain.
+_#ENDLOOP
+_#LOOP Entity_List
+  _// -- Schema_Name   : _&Schema_Name. 
+  _// -- Entity_Name   : _&Entity_Name.
+  _// -- Stereotype    : _&Stereotype.
+  _// -- Description   : _&Description. 
+   _<trim('test')_<
+   _<trim('_&Entity_Name.' )||PadR('_&sss.')_<
+  _#DEFINE Entity_Name:: _<trim('_&Entity_Name.' )_<
+  _#DEFINE JsonSupport false
+  _#ECHO INFO false
+  _// ---------- START: Generating Package: _&Package_Name. Entity: _&Entity_Name. ---------- 
+  _#INCLUDE Templates/JavaClasses.tdl _\
+        Target_Package_Name="_&Package_Name." _\
+        Target_Entity_Name="_&Entity_Name."
+  _// ---------- FINISH: Generating Package: _&Package_Name. Entity: _&Entity_Name. ---------- 
+_#ENDLOOP
+
+_#EXIT 999 All Done
+
+  _#INCLUDE Templates/JavaClasses.tdl Target_Package_Name="_&Package_Name." Target_Entity_Name="_&Entity_Name."
+
+_//#INCLUDE Templates/JavaTypes.tdl Target_Package_Name=Geometry JsonSupport="false"
+_#INCLUDE Templates/JavaClasses.tdl Target_Package_Name=Geometry Entity_Name="location" myArg JsonSupport='false'
+_#INCLUDE Templates/JavaClasses.tdl Target_Package_Name=Geometry Entity_Name="shape" JsonSupport="false"
+_#INCLUDE Templates/JavaClasses.tdl Target_Package_Name=Geometry Entity_Name="circle" JsonSupport="false"
+_#INCLUDE Templates/JavaClasses.tdl Target_Package_Name=Geometry Entity_Name="shape" JsonSupport="false"
+_#EXIT All Done
+
+  _#LOOP Entity_List
+  /**
+   * Package: _&Package_Name.
+   * Class: _&Entity_Name. 
+   * Description: _&Description.
+   */
+  class _&Entity_Name.
+  { //===== Private Attributes
+    _#LOOP Entity_HasA_Details
+      _#DEFINE Attribute_Name::lowerCamelCase _<toLowerCamelCase ( '_&Attribute_Name.' )_<
+      private _&Domain_Name. _&Attribute_Name::lowerCamelCase.;
+    _#ENDLOOP 
+    //===== Getter and Setters
+     _#LOOP Entity_HasA_Details
+       _#DEFINE Attribute_Name::lowerCamelCase _<toLowerCamelCase ( '_&Attribute_Name.' )_<
+       _#DEFINE Attribute_Name::UpperCamelCase _<toUpperCamelCase ( '_&Attribute_Name.' )_<
+       //----- _&Attribute_Name::UpperCamelCase.
+       public int get_&Attribute_Name::UpperCamelCase.() 
+       { return _&Attribute_Name::lowerCamelCase.;
+       } // End _&Attribute_Name::UpperCamelCase. Getter
+       public int set_&Attribute_Name::UpperCamelCase. ( _&Domain_Name. value ) 
+       { _&Attribute_Name::lowerCamelCase. = value;
+       } // End _&Attribute_Name::UpperCamelCase. Gette  
+    _#ENDLOOP
+  } // End class _&Entity_Name.
+_#ENDLOOP
+
+_#EXIT 0000 All Done
+
+_#CURSOR Entity_Details CSV _\
+   SELECT Schema_Name         Schema_Name,_\
+          Package_Name        Package_Name,                            _\
+          Entity_Name         Entity_Name,                             _\
+          Ordinal_Position    Ordinal_Position,                        _\
+          Attribute_Name      Attribute_Name,                          _\
+          Kind_of_Attribute   Kind_Of_Attribute,                       _\
+          Domain_Name         Domain_Name,                             _\
+          Data_Type           Data_Type,                               _\
+          Constraint_Name     Constraint_Name,                         _\
+          IsUnique            IsUnique,                                _\
+          Foreign_Entity      Foreign_Entity,                          _\
+          Foreign_Primary_Key Foreign_Primary_Key,                     _\
+          Multiplicity        Multiplicity                             _\
+    FROM geometry_entity_attribute.csv                                 _\
+    WHERE row.Entity_Name == toTitleSnakeCase ( trim ( "_&Target_Entity_Name." ) ) &&  row.Implementation == "concrete"  _\
+    ORDER BY Ordinal_Position
+_#DEFINE Target_Entity_Name Location
+_#LOOP Entity_HasA_Details
+    -- Schema_Name             _&Schema_Name.
+    -- Package_Name            _&Package_Name.
+    -- Entity_Name             _&Entity_Name.
+    -- Ordinal_Position        _&Ordinal_Position.
+    -- Attribute_Name          _&Attribute_Name.
+    -- Kind_Of_Attribute       _&Kind_Of_Attribute.
+    -- Domain_Name             _&Domain_Name.
+    -- Data_Type               _&Data_Type.
+    -- Kind_Of_Relationship    _&Kind_Of_Relationship.
+    -- Implementation          _&Implementation.
+    -- IsUnique                _&IsUnique.
+    -- Foreign_Entity          _&Foreign_Entity.
+    -- Foreign_Primary_Key     _&Foreign_Primary_Key.
+    -- Multiplicity            _&Multiplicity.
+    -- Description             _&Description.
+
+_#ENDLOOP
+_#EXIT
+_` this is a test
+multiple lines
+_`
+_#CURSOR Entity_List CSV _`
+  SELECT  Schema_Name,
+          Package_Name,
+          Entity_Name,
+          SteroType,
+          Description
+  FROM geometry_entity.csv
+  ORDER BY Entity_Name _`
+
+  _#LOOP Entity_List
+    -- Schema_Name    _&Schema_Name.
+    -- Package_Name   _&Package_Name.
+    -- Entity_Name    _&Entity_Name.
+    -- Sterotype      _&Sterotype.
+    -- Description    _&Description.
+  _#ENDLOOP
+_#EXIT All Done
+
+
+_#DEFINE longText _`Lorem ipsum dolor sit amet, consectetur adipiscing elit.Cras ac elit vitae sem faucibus vulputate.Quisque tempus lorem et elit efficitur, vel interdum est aliquet.In ultrices purus nisl, quis dictum sem ultrices non.
+
+
+Aenean volutpat sagittis justo.Nulla facilisi.Pellentesque malesuada felis vitae maximus tincidunt.Aliquam erat volutpat.Nulla facilisi.Integer ultricies tortor sed ligula ornare mattis.Curabitur vel eros risus.Aliquam pretium sapien ac aliquet imperdiet.Quisque tincidunt imperdiet odio a molestie.Etiam malesuada lacinia efficitur.
+
+
+
+Nunc sit amet velit lacus.Aliquam mauris felis, euismod et efficitur vel, commodo porta odio.Mauris iaculis urna sit amet mi dictum consequat.Phasellus semper dui sit amet ligula scelerisque, ac consequat nunc facilisis.Integer rutrum convallis orci.Vestibulum porttitor lobortis mauris sed rhoncus.Pellentesque hendrerit tincidunt quam, id pretium sapien dapibus vel.Pellentesque leo felis, laoreet eu lacus aliquet, auctor mattis lectus.Etiam a tortor non ex tempus facilisis sed eu risus.Aliquam mattis vel nisi euismod eleifend.Integer eu tortor placerat, auctor est quis, tincidunt ligula.Sed pellentesque diam ultricies felis scelerisque luctus.Ut feugiat et arcu vitae viverra.Etiam non tellus ultricies, lacinia sem et, blandit sem._`
+_&RULER.
+_#WW  class="PlainText" lineLength=50 initialPrefix='Wow ===>' prefix="--->" postfix="<----"  "_&longText."
+
+
+_#EXIT All Done
+
+
+
+
+
+_#DEFINE Domain_Name Copyright Grant Type
+toLowerSnakeCase: _<toLowerSnakeCase ( '_&Domain_Name.' )_<
+_#EXIT All Done
+_#INCLUDE <StdDefinition.tdl>
+_&Domain_Name.
+_#makeNames name=Domain_Name
+_#EXIT All Done
+
+
+_#CURSOR Domain_List CSV _\                  
+    SELECT Schema_Name, _\
+           Package_Name, _\
+           Domain_Name, _\
+           Kind_of_Domain, _\
+           Data_Type, _\
+           Domain_Default, _\
+           Character_Maximum_Length, _\
+           Numeric_Precision, _\
+           Numeric_Precision_Radix, _\
+           Numeric_Scale, _\
+           Maximum_Cardinality, _\
+           UDT_Name _\
+     FROM dido_cm_domains.csv _\
+ ORDER BY Domain_Name
+
+ _#SET GLOBAL counter 0
+_#LOOP Domain_List
+  _#SET counter _<(_&counter.+ 1)_<
+  _#DEFINE object_name _<toTitleSnakeCase("_&Domain_Name.")_<
+  _#makeNames name='Domain_Name'
+  Domain Name: _&Domain_Name.
+  Domain Name (SQL) : _&Domain_Name::upperSnakeCase.
+  _//#makeNames  name = 'Data_Type'
+  _#ECHO _&counter.) Processing: _&Domain_Name::TitleSnakeCase.( _&Data_Type::TitleSnakeCase.)
+_#ENDLOOP
+
+_#EXIT All Done
+
+
+
+The current output file: _&outputFileName.
+_#DEFINE specialFile testOutput.txt
+This line 000, this goes to the default output stream
+_#OUTPUT PAUSE
+This line 010, this goes goes nowhere
+_#OUTPUT RESUME
+This line 020, this goes to the default output stream
+_#OUTPUT BEGIN _&specialFile.
+Test line 100, goes to output stream test _&specialFile.
+_#OUTPUT PAUSE
+Test line 110, does NOT go to output stream OUTPUT is paused
+_#OUTPUT RESUME
+Test line 120, goes to output stream test _&specialFile.
+_#OUTPUT CLOSE
+This line 030, goes to the default output stream
+
+_#EXIT All Done
+_&tdlOutputPath.
+_#EXIT All Done
+
+
+
+Dear _&poc.:
+
+We have your address as:
+
+_#PUTLINE _&companyName.
+_#PUT _&companyAddress-firstAddressLine.
+_#IF ( ! isEmpty ( "_&companyAddress-secondAddressLine." ) )
+_#PUT , _&companyAddress-secondAddressLine.
+_#ENDIF
+_#PUT , _&companyAddress-city.
+_#PUT , _&companyAddress-state.
+_#PUTLINE
+
+Thank you
+
+_#EXIT 333
+This is a test to see if we can format an address line:
+_#PUTLINE Test line of text 200.1.
+_#PUT Test line of text 200.2.
+_#PUT  Test line of text 200.3.
+_#PUTLINE  Test line of text 200.4.
+_#EXIT 333
+
+
+
+_#DEFINE bookTitle TheGreatGatsby
+_#INCLUDE ^Data/_&bookTitle..json^
+  * title              : _&title.
+  * author             : _&author.
+  * isbn               : _&isbn
+_#DEFINE bookTitle ToKillAMockingBird
+_#INCLUDE ^Data/_&bookTitle..json^
+  * title              : _&title.
+  * author             : _&author.
+  * isbn               : _&isbn.
+
+_#EXIT 333
+
+
+
+_#DEFINE myLocalSpec localhost:8081
+_#INCLUDE "Example.tdl" _\
+         fileInputSpec fileoutputSpec loggingSpec _\
+         authors="Jane Doe, John Q.Public"
+
+_#EXIT 333
+
+_#INCLUDE ^Data/TheGreatGatsby.json^
+  * title              : _&title.
+  * author             : _&author.
+  * publication_year   : _&publication_year.
+  * isbn               : _&isbn.
+  * genre              : _&genre.
+  * availability       : _&availability.
+  * checked_out_by     : _&checked_out_by.
+  * due_date           : _&due_date.
+
+_#EXIT 333
+
+_#SET GLOBAL includeCounter 99
+_#SET includeCounter _<_&includeCounter.+1_<
+_#INCLUDE "Example.tdl"
+* includeCounter      : _&includeCounter.
+* myLocalVariable     : _&myLocalVariable.
+
+
+_#EXIT 333
+
+_#ECHO ====== _&includeCounter.
+_#INCLUDE "Example.tdl"
+_#ECHO ====== _&includeCounter.
+_#INCLUDE "Example.tdl" One Two authors="Jane Doe"
+_#ECHO ====== _&includeCounter.
+_#INCLUDE "./Example.tdl"
+_#ECHO ====== _&includeCounter.
+_#INCLUDE "/Users/robertstavros/Documents/TemplateFoundryJS/Templates/Example.tdl"
+_#ECHO ====== _&includeCounter.
+_#EXIT 333
+
+
+_#INCLUDE <StdDefinition.tdl>
+_#INCLUDE <StdDefinition.tdl> Test One two name=myName
+_#INCLUDE "/Users/user/Documents/TemplateFoundryJS/Data/tdlSettings.json"
+_#INCLUDE /Users/user/Documents/TemplateFoundryJS/Data/tdlSettings.json
+_#INCLUDE <StdDefinition.tdl> arg1 arg2=hello
+_#INCLUDE "/Users/user documents/TemplateFoundryJS/Data/tdlSettings.json" arg1 arg2=hello
+_#INCLUDE ^Data/tdlSettings.json^ Test One two name=myName
+_#INCLUDE "Templates/HelloWorld.tdl" Alpha Beta Gamma name="your Name"
+
+_#ECHO Hello World
+
+_{ makeNames
+  _#DEFINE variableName _&_&name..
+  _#DEFINE variableNameSnake _<toTitleSnakeCase ( '_&variableName.' )_<
+  _#SET GLOBAL _&variableNameSnake.::titleCase _<toTitleCase ( '_&variableName.' )_<
+  _#SET GLOBAL _&variableNameSnake.::lowerCase _<toLowerCase ( '_&variableName.' )_<
+  _#SET GLOBAL _&variableNameSnake.::upperCase _<toUpperCase ( '_&variableName.' )_<
+  _#SET GLOBAL _&variableNameSnake.::lowerSnakeCase _<toLowerSnakeCase ( '_&variableName.' )_<
+  _#SET GLOBAL _&variableNameSnake.::upperSnakeCase _<toUpperSnakeCase ( '_&variableName.' )_<
+  _#SET GLOBAL _&variableNameSnake.::titleSnakeCase _<toTitleSnakeCase ( '_&variableName.' )_<
+  _#SET GLOBAL _&variableNameSnake.::upperCamelCase _<toUpperCamelCase ( '_&variableName.' )_<
+  _#SET GLOBAL _&variableNameSnake.::lowerCamelCase _<toLowerCamelCase ( '_&variableName.' )_<
+_}
+
+_{ UnMakeNames
+  _#DEFINE variableName _&_&name..
+  _#DEFINE variableNameSnake _<toTitleSnakeCase ( '_&variableName.' )_<
+  _#UNSET _&variableNameSnake.::titleCase     
+  _#UNSET _&variableNameSnake.::lowerCase     
+  _#UNSET _&variableNameSnake.::upperCase     
+  _#UNSET _&variableNameSnake.::lowerSnakeCase
+  _#UNSET _&variableNameSnake.::upperSnakeCase
+  _#UNSET _&variableNameSnake.::titleSnakeCase
+  _#UNSET _&variableNameSnake.::upperCamelCase
+  _#UNSET _&variableNameSnake.::lowerCamelCase
+_}
+
+_#DEFINE object_name Employee Details
+_#makeNames name=object_name
+Employee_Details::titleCase        := _&Employee_Details::titleCase.
+Employee_Details::toLowerCase      := _&Employee_Details::lowerCase.
+Employee_Details::toUpperCase      := _&Employee_Details::upperCase.
+Employee_Details::lowerSnakeCase   := _&Employee_Details::lowerSnakeCase.
+Employee_Details::upperSnakeCase   := _&Employee_Details::upperSnakeCase.
+Employee_Details::titleSnakeCase   := _&Employee_Details::titleSnakeCase.
+Employee_Details::upperCamelCase   := _&Employee_Details::upperCamelCase.
+Employee_Details::lowerCamelCase   := _&Employee_Details::lowerCamelCase.
+_#UnMakeNames name=object_name
+Employee_Details::titleCase        := _&Employee_Details::titleCase.
+Employee_Details::toLowerCase      := _&Employee_Details::lowerCase.
+Employee_Details::toUpperCase      := _&Employee_Details::upperCase.
+Employee_Details::lowerSnakeCase   := _&Employee_Details::lowerSnakeCase.
+Employee_Details::upperSnakeCase   := _&Employee_Details::upperSnakeCase.
+Employee_Details::titleSnakeCase   := _&Employee_Details::titleSnakeCase.
+Employee_Details::upperCamelCase   := _&Employee_Details::upperCamelCase.
+Employee_Details::lowerCamelCase   := _&Employee_Details::lowerCamelCase.
+_#EXIT All Done
+
+_#DEFINE Employee_Name = "John Q.Public"
+_#DEFINE Employee  Employee_Name
+_#DEFINE PersonOfInterest _&_&Employee..
+Employee Name      : _&Employee_Name.
+Employee           : _&Employee.
+Person Of Interest : _&PersonOfInterest.
+
+_#EXIT All Done
+
+_#DEFINE myVar-1     "one"
+_#DEFINE myVar-2     "two"
+_#DEFINE myVar-3     "three"
+_#DEFINE arrayIndex 2
+myVar-1    _&myVar-1.
+myVar-2    _&myVar-2.
+myVar-3    _&myVar-3.
+arrayIndex _&arrayIndex.
+The value of my-var(_&arrayIndex.) is: _&myVar-_&arrayIndex..
+
+_#DEFINE myVar(1)     "one"
+_#DEFINE myVar(2)     "two"
+_#DEFINE myVar(3)     "three"
+The value of my-var(_&arrayIndex.) is: _&myVar(_&arrayIndex.).
+
+_#EXIT All Done
+
+
+_// Defining a macro called: addDisclaimer
+_{ addDisclaimer 
+_#IFNDEF CopyrightStatement
+  _#DEFINE CopyrightStatement The software is covered by the Create Commons License Agreement
+_#ENDIF
+/** The following software does not have a warranty or guarantee.
+ *
+ * _&CopyrightStatement.
+ * 
+ * Please attribute the authors:
+ * Authors: _&authors.
+ * Written: _&startMonth._&startYear.
+ * _&companyName.
+ * _&companyAddress-firstAddressLine., _&companyAddress-secondAddressLine.
+ * _&companyAddress-city., _&companyAddress-state., _&companyAddress-country., _&companyAddress-mailCode.
+ **/
+_}
+_// Execute the macro called addDisclaimer WITHOUT arguments
+_#addDisclaimer
+_// Execute the macro called addDisclaimer WITH arguments
+_#addDisclaimer _\
+     "It is covered by the Create Commons License Agreement" _\
+     "Please attribute Authors" _\
+     authors="Jane Doe, and John Q.Public"
+
+_#EXIT All Done
+
+_{ addHearder companyName author date
+/** The following code was produced by _&author.on _&1.
+ *  for companyName _&companyName.All Rights reserved.
+ **/
+_}
+_#EXIT All Done
+
+
+_{ showParams
+  &1.= _&1.
+  &2.= _&2.
+  &3.= _&3.
+  &4.= _&4.
+  &name.= _&name.
+  &four.= _&four.
+  &qwerty.= _&qwerty.
+_}
+
+_#showParams One Two name="John Q.Public" three four=more
+
+_#EXIT All Done
+
+_#DEFINE mainStoryLine true
+_#DEFINE ageOfReader 65
+0) The story begins here is suitable for a _&ageOfReader.year old.
+_#IF ( _&mainStoryLine.)
+  1) then blah blah happens
+  _#IF ( _&ageOfReader.< 3 )
+      2.1) sometimes this happens
+  _#ELSEIF ( _&ageOfReader.<= 8 )
+      2.2) content for children
+  _#ELSEIF ( _&ageOfReader.> 8 && _&ageOfReader.<=16 )
+      2.3) content for young adults
+  _#ELSE
+      2.4) content for adults
+  _#ENDIF
+  3) Come together, right now
+_#ENDIF
+4) The End.They liked the story
+
+_#EXIT All Done
+
+
+_#DEFINE mainStoryLine true
+_#DEFINE alternateStory true
+0) The story begins here
+_#IF ( _&mainStoryLine.)
+   1) then blah blah happens
+_#ELSEIF ( _&alternateStory.)
+   2) sometimes this happens
+_#ELSE
+   3) but when all else fails, this happens
+_#ENDIF
+4) The story continues here
+_#DEFINE mainStoryLine false
+_#DEFINE alternateStory true
+5) The story begins here
+_#IF ( _&mainStoryLine.)
+   6) then blah blah happens
+_#ELSEIF ( _&alternateStory.)
+   7) sometimes this happens
+_#ELSE
+   8) but when all else fails, this happens
+_#ENDIF
+9) The story continues here
+_#DEFINE mainStoryLine false
+_#DEFINE alternateStory false
+10) The story begins here
+_#IF ( _&mainStoryLine.)
+   11) then blah blah happens
+_#ELSEIF ( _&alternateStory.)
+   12) sometimes this happens
+_#ELSE
+   13) but when all else fails, this happens
+_#ENDIF
+14) The story continues here
+
+_#EXIT All Done
+
+
+
+_#IFNSET myVariable
+  _#SET GLOBAL myVariable Now myVariable exists!
+  1) Variable myVariable NOT already set
+_#ELSE
+  2) Variable myVariable already set: _&myVariable.
+_#ENDIF
+_#DEFINE yourVariable Now yourVariable exists!
+_#IFNSET yourVariable
+  3) Variable myVariable is already set: _&myVariable.
+  4) Variable yourVariable is NOT already set
+_#ELSE
+  5) Variable myVariable already set: _&myVariable.
+  6) Variable yourVariable already set: _&yourVariable.
+_#ENDIF
+
+_#EXIT 0 All Done
+
+_#IFSET myVariable
+  1) Variable myVariable already set: _&myVariable.
+_#ELSE
+  _#SET GLOBAL myVariable Now myVariable exists!
+  2) Variable myVariable NOT already set
+_#ENDIF
+_#SET GLOBAL yourVariable Now yourVariable exists!
+_#IFSET yourVariable
+  3) Variable myVariable already set: _&myVariable.
+  4) Variable yourVariable already set: _&yourVariable.
+_#ELSE
+  5) Variable myVariable is already set: _&myVariable.
+  6) Variable yourVariable is NOT set
+_#ENDIF
+
+_#EXIT 0 All Done
+
+
+_#IFNDEF myVariable
+  _#DEFINE myVariable Now myVariable exists!
+  1) Variable myVariable NOT already defined
+_#ELSE
+  2) Variable myVariable already defined: _&myVariable.
+_#ENDIF
+_#DEFINE yourVariable Now yourVariable exists!
+_#IFNDEF yourVariable
+  3) Variable myVariable is already defined: _&myVariable.
+  4) Variable yourVariable is NOT already defined
+_#ELSE
+  5) Variable myVariable already defined: _&myVariable.
+  6) Variable yourVariable already defined: _&yourVariable.
+_#ENDIF
+
+_#EXIT 0 All Done
+
+
+_#IFDEF myVariable
+  1) Variable myVariable already defined: _&myVariable.
+_#ELSE
+  _#DEFINE myVariable Now myVariable exists!
+  2) Variable myVariable NOT already defined
+_#ENDIF
+_#DEFINE yourVariable Now yourVariable exists!
+_#IFDEF yourVariable
+  3) Variable myVariable already defined: _&myVariable.
+  4) Variable yourVariable already defined: _&yourVariable.
+_#ELSE
+  5) Variable myVariable is already defined: _&myVariable.
+  6) Variable yourVariable is NOT already defined
+_#ENDIF
+
+_#EXIT 0 All Done
+
+_#SET ENVIRONMENT suppressBlanks true
+
+_#SET ENVIRONMENT factoryName My Factory
+_#SET ENVIRONMENT ourProductName Templenator
+Factory is: _&factoryName.running _&ourProductName.v _&versionNumber.
+_#SET GLOBAL metaVarStart _$
+Factory is: _$factoryName.running _$ourProductName.v _$versionNumber.
+_#SET GLOBAL metaVarStart _&
+_#UNSET metaVarStart
+_#UNSET factoryName
+_#UNSET ourProductName
+_#DEFINE myName John Q.Public
+_#UNSET myName
+This is my name: _&myName.
+_#UNSET QwertyBogusName
+This should not be defined: _&QwertyBogusName.
+_#EXIT 0 All Done
+
+timestamp: _&startTimeStamp.
+year: _&startYear.
+month: _&startMonth.
+day: _&startDay.
+_&versionNumber.
+_#EXIT 0 All Done
+
+Testing line comments at end of line _// this is a line comment
+_// This is also a line comment on a line by itself
+We do real work here, no comments on this line
+_/* This block comment starts on one line and ends on another
+And it finishes on the next
+_*/
+_/* One line
+two lines
+three lines */
+We do real work here
+_/* This comment starts and stops on one line _*/
+_/* This comment with regular text after it _*/ Text after comment
+_/* Start comment _*/ Real middle Text _/* end with a comment _*/
+_/* comment _*/ Text here _/* comment _*/ text here _/* start comment
+_/*_*/
+All done!
+
+
+_#EXIT 0 All Done
+
+
+
+
+
+
+
+_#ECHO OUTPUT OFF
+_#DEFINE ObjectName This   is a   test (object)
+Host Command: compressText,           "_< compressText ( "_&ObjectName.") _<"
+Host Command: eliminateNonAlphanumerics,          "_< eliminateNonAlphanumerics ( "_&ObjectName.") _<"
+Host Command: toValidNameChars,         "_< toValidNameChars ( "_&ObjectName.") _<"
+Host Command: toUpperCamelCase,              "_< toUpperCamelCase ( "_&ObjectName.") _<"
+Host Command: center,                   "_< center ( "_&ObjectName.",40 ) _<"
+Host Command: padLeft,                  "_< padLeft ( "_&ObjectName.",40 ) _<"
+Host Command: PadRight,                 "_< padRight ( "_&ObjectName.",40 ) _<"
+Host Command: trim,                     "_< trim ( "_&ObjectName.") _<"
+Host Command: trimLeft,                 "_< trimLeft ( "_&ObjectName.") _<"
+Host Command: trimRight,                "_< trimRight ( "_&ObjectName.") _<"
+Host Command: toTitleCase,              "_< toTitleCase ( "_&ObjectName.") _<"
+Host Command: toLowerCase,              "_< toLowerCase ( "_&ObjectName.") _<"
+Host Command: toUpperCase,              "_< toUpperCase ( "_&ObjectName.") _<"
+Host Command: toLowerSnakeCase,         "_< toLowerSnakeCase ( "_&ObjectName.") _<"
+Host Command: toUpperSnakeCase,         "_< toUpperSnakeCase ( "_&ObjectName.") _<"
+Host Command: toTitleSnakeCase,         "_< toTitleSnakeCase ( "_&ObjectName.") _<"
+Host Command: toUpperCamelCase,         "_< toUpperCamelCase  ( "_&ObjectName.") _<"
+Host Command: toLowerCamelCase,         "_< toLowerCamelCase  ( "_&ObjectName.") _<"
+
+_#EXIT 0 All Done
+
+
+
+
+_#DEFINE thisYear _< new Date().getFullYear() _<
+The year this was written is: _&thisYear.
+The month this was written is: _< new Date().toLocaleString('en-US', { month: 'long' }) _<
+
+The Current Directory is: _<process.cwd()_<
+We are running on architecture: _<os.arch()_< and the platform is: _< os.platform()_<.
+
+_#DEFINE Table_Name my Table Name
+The Table name we are working with is "_<toTitleCase ( '_&Table_Name.')_<"
+Table Name used in the code is: _<toUpperSnakeCase ( '_&Table_Name.')_<
+Table Name used as a Class name is: _<toUpperCamelCase ( '_&Table_Name.')_<
+Table Name used as an instance of the Class name is: _<toLowerCamelCase ( '_&Table_Name.')_<
+
+_#EXIT 0 All Done
+
+_#SET GLOBAL myName John Q.Public
+_#DEFINE yourName Jane Doe
+My Name is _&myName., and your name is _&yourName.
+_#UNDEFINE yourName
+My Name is _&myName., and your name is _&yourName.
+_#UNSET myName
+_#DEFINE yourName Clem Kadiddlehopper 
+My Name is _&myName., and your name is _&yourName.
+
+_#EXIT 0 All Done
+
+This is test line number one.
+This is test line number two.
+_#EXIT 22 We are done with this TDL Template code snippet - All Done
+This is test line number three.
+
+_#EXIT 0 All Done
+
+
+_#DEFINE myName John Q.Public
+_// ===== DUMP ENVIRONMENT
+_#DUMP ENVIRONMENT
+_// ===== DUMP SETTINGS
+_#DUMP SETTINGS 
+_// ===== DUMP STACK ( same as LOCAL )
+_#DUMP STACK 
+_// ===== DUMP MACROS
+_#DUMP MACROS 
+_// ===== DUMP CURSORS
+_#DUMP CURSORS 
+_// ===== DUMP ALL
+_#DUMP ALL
+
+
+_#EXIT 0 All Done
+
+
+_#DEFINE myName John Q.Public
+My Name is _&myName.
+_#DEBUG ON
+My Name is _&myName.
+_#DEBUG OFF
+My Name is _&myName.
+
+_#EXIT 0 All Done
+
+ 
+ _#DEFINE myName John Q.Public
+ _#DEFINE mySport bicycling
+ _#DEFINE myAddress-line1 170 Clear View Lane
+ _#DEFINE myAddress-City Template Town
+ _#DEFINE myAddress-State California
+ _#DEFINE myAddress-country USA
+ 
+Hello, my name is _&myName..I am very interested in _&mySport..
+
+My address is: _&myAddress-line1., _&myAddress-City., _&myAddress-State., _&myAddress-country._&myZipCode.
+
+_#DEFINE myZipCode 90001
+This time with a Zip Code: _&myAddress-line1., _&myAddress-City., _&myAddress-State., _&myAddress-country._&myZipCode.
+
+ _#EXIT 0 All Done
+
+ _#ECHO We procesed first line 111
+
+ Here is the last line 222
+
+ _#EXIT All Done
+ 
+ _#CURSOR Entity_Details_List CSV   _`
+   SELECT Schema_Name,                
+          Package_Name,               
+          Entity_Name,                
+          Ordinal_Position,           
+          Attribute_Name,             
+          Kind_of_Attribute,          
+          Domain_Name,                
+          Data_Type,                  
+          Constraint_Name,            
+          isUnique,                   
+          Foreign_Entity,             
+          Foreign_Primary_Key,        
+          Multiplicity                
+    FROM dido_cm_entity_attribute.csv
+    WHERE Entity_Name =  toUpperSnakeCase(row.Entity_Name.trim()) === toUpperSnakeCase(toValidNameChars('_&Entity_Name.').trim())
+    ORDER BY Schema_Name, Package_Name, Entity_Name, Ordinal_Position _`
+
+_#DUMP CURSORS
+
+ 
+ _#CURSOR Table_Definition SQL _\
+  SELECT Table_Name, _\
+         Column_Name, _\
+         Ordinal_Position, _\
+         Data_Type, _\
+         Domain_Schema, _\
+         Domain_Name  _\
+   FROM information_schema.columns _\
+   WHERE Upper(table_name) = Upper('_&1.') _\
+   ORDER by Ordinal_Position
+
+_#EXIT 444 All Done
+
+_#OUTPUT BEGIN ./Output/testOutput.txt
+_{ addDisclaimer 
+/** The following code does not have a warranty or guarantee.
+ * _&1.
+ * _&2.
+ **/
+_}
+_{ addHearder companyName author date
+/** The following code was produced by _&author.on _&1.
+ *  for companyName _&companyName.All Rights reserved.
+ **/
+_}
+
+_#addHearder "01-May-2023" companyName=Jackrabbit author="Samwise Gamgee" 
+_#addDisclaimer "It is covered by the Create Commons License Agreement" "Please attribute Authors" 
+
+_#EXIT All Done
+
+
+Thest line 000, does NOT go to the output stream
+_#OUTPUT BEGIN ./Output/testOutput.txt
+Test line 100, does go to the output stream
+_#OUTPUT PAUSE
+Test line 200, does NOT go to the output stream because OUTPUT is paused
+_#OUTPUT RESUME
+_#PUTLINE Test line of text 200.1.
+_#PUT Test line of text 200.2.
+_#PUT  Test line of text 200.3.
+_#PUTLINE  Test line of text 200.4.
+Test line 300, does go to the output stream because OUTPUT is RESUMED
+_#OUTPUT CLOSE
+Test line 400, does NOT go to the output stream because OUTPUT is CLOSED
+
+_#EXIT All Done
+
+
+
+Thest line 000, does not go to the output file
+_#PUTLINE Test line 000.1.
+_#OUTPUT BEGIN ./Output/testOutput.txt
+Test line 100, does go to the output file
+_#PUTLINE Test line 100.1.
+_#OUTPUT PAUSE
+Test line 200, does NOT go to the output file because OUTPUT is paused
+_#PUTLINE Test line 200.1.
+_#OUTPUT RESUME
+Test line 300, does go to the output file because OUTPUT is RESUMED
+_#PUTLINE Test line 300.1.
+_#OUTPUT CLOSE
+Test line 400, does NOT go to the output file because OUTPUT is CLOSED
+_#PUTLINE Test line 400.1.
+
+_#EXIT All Done
+
+
+
+
+_#IFSET myEnvVariable
+  myEnvVariable is defined as '_&myEnvVariable.'
+_#ELSE
+  myEnvVariable is NOT define
+_#ENDIF
+_#IFSET myGblVariable
+  myGblVariable is defined as '_&myGblVariable.'
+_#ELSE
+  myGblVariable is NOT define
+_#ENDIF
+_#SET ENVIRONMENT myEnvVariable has an ENVIRONMENT value
+_#SET GLOBAL myEnvVariable has an ENVIRONMENT value
+_#IFSET myEnvVariable
+  myEnvVariable is defined as '_&myEnvVariable.'
+_#ELSE
+  myEnvVariable is NOT defined
+_#ENDIF
+_#IFSET myGblVariable
+  myGblVariable is defined as '_&myGblVariable.'
+_#ELSE
+  myGblVariable is NOT defined
+_#ENDIF
+
+_#EXIT All Done
+
+_#IFNDEF myVariable
+  myVariable is NOT defined
+_#ELSE
+  myVariable is defined as '_&myVariable.'
+_#ENDIF
+_#DEFINE myVariable has a value
+_#IFNDEF myVariable
+  myVariable is NOT defined
+_#ELSE
+  myVariable is defined as '_&myVariable.'
+_#ENDIF
+
+_#EXIT All Done
+
+_#IFDEF myVariable
+  myVariable is defined as '_&myVariable.'
+_#ELSE
+  myVariable is NOT defined
+_#ENDIF
+_#DEFINE myVariable has a value
+_#IFDEF myVariable
+  myVariable is defined as '_&myVariable.'
+_#ELSE
+  myVariable is NOT defined
+_#ENDIF
+
+_#EXIT All Done
+
+
+
+The story begins here aaaa
+_#IF ( false )
+   blah, blah, blah
+_#ELSEIF ( false )
+   how now brown cow
+_#ELSE
+   the right way is easy and always the best
+_#ENDIF
+The story continues here
+
+_#EXIT All Done
+
+
+The story begins here aaaa
+_#IF ( true )
+   blah, blah, blah
+_#ELSE
+   how now brown cow
+_#ENDIF
+The story continues here
+_#IF ( false )
+   no way, no how
+_#ELSE ( true )
+   the right way is easy and always the best
+_#ENDIF
+
+_#EXIT All Done
+
+
+
+
+The story begins here aaaa
+_#IF ( true )
+   blah, blah, blah
+_#ELSEIF ( true )
+   how now brown cow
+_#ENDIF
+The story continues here
+_#IF ( false )
+   no way, no how
+_#ELSEIF ( true )
+   the right way is easy and always the best
+_#ENDIF
+_#IF ( false )
+   We can not spread falsities
+_#ELSEIF ( false )
+   No matter how we try
+_#ENDIF
+The story ends here
+
+_#EXIT All Done
+
+The story begins here
+_#IF ( true == true )
+   blah, blah, blah
+_#ELSIF false 
+   Ho hum
+_#ELSE
+   When all else fails
+_#ENDIF
+The story ends here
+
+_#DEFINE loremIpsumText _`Lorem ipsum dolor sit amet, consectetur adipiscing elit.Cras ac elit vitae sem faucibus vulputate.Quisque tempus lorem et elit efficitur, vel interdum est aliquet.In ultrices purus nisl, quis dictum sem ultrices non.Aenean volutpat sagittis justo.Nulla facilisi.Pellentesque malesuada felis vitae maximus tincidunt.Aliquam erat volutpat.Nulla facilisi.Integer ultricies tortor sed ligula ornare mattis.Curabitur vel eros risus.Aliquam pretium sapien ac aliquet imperdiet.Quisque tincidunt imperdiet odio a molestie.Etiam malesuada lacinia efficitur.
+
+Nunc sit amet velit lacus.Aliquam mauris felis, euismod et efficitur vel, commodo porta odio.Mauris iaculis urna sit amet mi dictum consequat.Phasellus semper dui sit amet ligula scelerisque, ac consequat nunc facilisis.Integer rutrum convallis orci.Vestibulum porttitor lobortis mauris sed rhoncus.Pellentesque hendrerit tincidunt quam, id pretium sapien dapibus vel.Pellentesque leo felis, laoreet eu lacus aliquet, auctor mattis lectus.Etiam a tortor non ex tempus facilisis sed eu risus.Aliquam mattis vel nisi euismod eleifend.Integer eu tortor placerat, auctor est quis, tincidunt ligula.Sed pellentesque diam ultricies felis scelerisque luctus.Ut feugiat et arcu vitae viverra.Etiam non tellus ultricies, lacinia sem et, blandit sem._`
+
+_#WORDWRAP SQL _&loremIpsumText.
+
+_#SET ENVIRONMENT WwFinalPostfix --END 
+_#SET ENVIRONMENT WwHyphenate false
+_#SET ENVIRONMENT WwHyphenation - 
+_#SET ENVIRONMENT WwInitialPrefix --START 
+_#SET ENVIRONMENT WwLineLength 65
+_#SET ENVIRONMENT WwPadTheOutput false
+_#SET ENVIRONMENT WwPostfix
+_#SET ENVIRONMENT WwPrefix --MORE 
+_#SET ENVIRONMENT WwQuoteLiteralsfalse false
+_#SET ENVIRONMENT WwtextBreak --BREAK
+
+_#WORDWRAP ENVIRONMENT _&loremIpsumText.
