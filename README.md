@@ -1,6 +1,6 @@
 # tdl README
 
-This is the README for extension Template Definition Language (tdl) files. TDL is a Meta-Language that controls the output produced by the Template Processor. The Template Processor reads and input file (i.e., template) decorates with TDL commands that help control and generate an transformed output file. The TDL Meta-Commands are described using Backus Naur Form (BNF) notation. See (TDL.BNF).
+This is the README for extension Template Definition Language (tdl) files. TDL is a Meta-Language that controls the output produced by the Template Processor. The Template Processor reads and input file (i.e., template) decorates with TDL commands that help control and generate an transformed output file. The TDL Meta-Commands are described using Backus Naur Form (BFN) notation. See (TDL.BNF).
 
 ## Features
 
@@ -32,7 +32,7 @@ None at this time.
 
 ## Release Notes
 
-New Release. Version 0.8.0
+New Release. Version 0.7.0
 
 ### 0.7.0
 

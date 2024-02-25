@@ -2,7 +2,8 @@
   "name"                                     : "TDL Theme (Dark)",
   "type"                                     : "dark",   
   "colors"                                   : 
-  { "editor.foreground"                      : "#D4D4D4",
+  { 
+    "editor.foreground"                      : "#D4D4D4",
     "editor.background"                      : "#282C34",
     "constant.character"                     : "#F07178",
     "constant.boolean"                       : "#F78C6C" 

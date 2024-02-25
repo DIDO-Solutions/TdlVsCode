@@ -1,1 +1,14 @@
-.DS_Store
+.DS_Store/
+# ignore the git instructions
+git instructions.txt
+
+# ignore extra folders
+VSCodeExtension (original)/
+VSCodeExtension/
+template/
+vscodeExtensionFIles/
+TDL/
+temp/
+TemplateDL\ copy/
+TemplateDL\ orig/
+
