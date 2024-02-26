@@ -1,4 +1,4 @@
-_#INCLUDE Templates/CommonDef.tdl
+_#INCLUDE Templates/CommonDef.tdl a=b c d='test 1'
 _#DEFINE targetSwLang:: Language: _&Java. _<test ( 'hello _&name. ') _<
 _#DEFINE targetSwLang Java
 _#DEFINE Target_Package_Name:: Geometry

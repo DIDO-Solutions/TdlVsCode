@@ -1,3 +1,4 @@
+.DS_Store
 # ignore the git instructions
 git instructions.txt
 
@@ -7,3 +8,7 @@ VSCodeExtension/
 template/
 vscodeExtensionFIles/
 TDL/
+temp/
+TemplateDL\ copy/
+TemplateDL\ orig/
+
