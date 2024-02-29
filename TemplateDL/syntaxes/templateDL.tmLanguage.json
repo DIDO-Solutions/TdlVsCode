@@ -99,28 +99,24 @@
       ]
     },
     "numerics" :
-    { "name" : "constant.math.numbers",
+    { "name" : "javascript.numbers",
       "match" : "([+\\-\\.0-9])"
     },
     "operators" :
-    { "name" : "constant.math.operators",
+    { "name" : "javascript.operators",
       "match" : "([=\\+\\-\/\\^\\*\\%\\.<>!|&])"
     },
     "booleanTrueValues" :
-    { "name" : "constant.math.true.booleanValue",
+    { "name" : "javascript.true.booleanValue",
       "match" : "\\b(true|1)\\b"
     },
     "booleanFalseValues" :
-    { "name" : "constant.math.false.booleanValue",
+    { "name" : "javascript.false.booleanValue",
       "match" : "\\b(false|0)\\b"
     },
     "functionNames" :
     { "name": "keyword.meta.function.templateDL",
     "match": "\\b(toValidNameChars|center|padLeft|padRight|trim|trimLeft|trimRight|toTitleCase|toLowerCase|toUpperCase|toLowerSnakeCase|toUpperSnakeCase|toTitleSnakeCase|toUpperCamelCase|toLowerCamelCase|toKebabCase|toLowerKebabCase|toUpperKebabCase|isNumeric|isNull|isUndefined|isEmpty|isUsable|isInitialized|coalesce)\\b"
-    },
-    "variableNames" :
-    { "name" : "constant.math.varNames",
-      "match" : "\\b[a-zA-Z_][a-zA-Z_0-9]*\\b"
     },
     "argumentList": 
     {
@@ -128,7 +124,7 @@
       "match": "(\\b[a-zA-Z_][a-zA-Z_0-9]*)(?:\\s*(=)\\s*('[^']*'|\"[^\"]*\"|\\S+))?",
       "captures": {
           "1": { "name": "keyword.meta.defineVariableName.templateDL" },
-          "2": { "name": "constant.math.operators" },
+          "2": { "name": "javascript.operators" },
           "3": { "name": "keyword.meta.defineVariableValue.templateDL" }
       }
   },

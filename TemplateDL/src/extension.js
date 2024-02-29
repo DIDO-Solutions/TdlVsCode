@@ -27,12 +27,12 @@ function activate ( context )
   // When this command is executed, it shows an information message 
   // with the content 'Hello World!'. Commands are often associated 
   // with user interface elements, like buttons or menu items.
-  let disposable = vscode.commands.registerCommand
-    ( 'extension.sayHello', () => 
-      { 
-        vscode.window.showInformationMessage('TDL Extension says Hello World!');
-      }
-    );
+  let disposable 
+        = vscode.commands.registerCommand
+          ( 'extension.sayHello', () => 
+            { vscode.window.showInformationMessage('TDL Extension says Hello World!');
+            }
+          );
   // Adds the disposable created above to the context's subscriptions. 
   // This ensures that resources are properly disposed of when the 
   // extension is deactivated.
@@ -53,7 +53,7 @@ function deactivate()
  * they can be accessed by Visual Studio Code when loading the 
  * extension.
  */
-module.exports = { 
-  activate,
-  deactivate
-};
+module.exports 
+         = { activate,
+             deactivate
+           };

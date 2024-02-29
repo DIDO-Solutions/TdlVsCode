@@ -1,9 +1,9 @@
 { "name"                 : "template-definition-language",
   "displayName"          : "Template Definition Language Meta-Language Support",
-  "publisher"            : "DidoSolutions",
+  "publisher"            : "Dido Solutions",
   "description"          : "Template Definition Language (TDL) uses Meta-Commands to direct as TDL Processor in how to create output based on the input.",
-  "version"              : "0.8.0",
-  "repository"           : "https://github.com/your-username/your-repo",
+  "version"              : "0.9.0",
+  "repository"           : "https://github.com/DIDO-Solutions/TdlVsCode/tree/ebd2f815c949db856fade0c196aa8b77cd0e766b/TemplateDL",
   "devDependencies"      : { "vscode"                : "^1.85.1",
                              "vsce"                  : "^1.108.0"
                            },
@@ -35,6 +35,11 @@
                                 "uiTheme"            : "vs-dark",
                                 "path"               : "./themes/templateDL-theme-dark.json"
                               }
+                          ],
+                          "snippets" :
+                          [ { "language"               : "templateDL",
+                              "path"                   : "./snippets/templateDL-snippet.json"
+                            }
                           ],
     "configuration"                                  : "./.vscode/settings.json"
 }
