@@ -1,7 +1,7 @@
-{ "folders": 
-     [ { "path": "../templateDL" }
+{ "folders"        : 
+     [ { "path"    : "../templateDL" }
      ],
-  "settings": 
+  "settings"       : 
   { "editor.tokenColorCustomizations": 
     { "[Visual Studio Dark]": 
 	  { "textMateRules": 
