@@ -3,7 +3,7 @@
      ],
   "settings"       : 
   { "editor.tokenColorCustomizations": 
-    { "[Visual Studio Dark]": 
+    { "[*]": 
 	  { "textMateRules": 
 	    [ { "scope"     : "source.templateDL constant.language",
             "settings"  : { "foreground": "#ba9249" }
@@ -177,7 +177,7 @@
             "settings"  : { "foreground": "#f48549"}
           },
           { "scope"     : "javascript.operators",
-            "settings"  : { "foreground": "#e388e5"}
+            "settings"  : { "foreground": "#c43c5e"}
           },
           { "scope"     : "javascript.varNames",
             "settings"  : { "foreground": "#4BC47A"}
