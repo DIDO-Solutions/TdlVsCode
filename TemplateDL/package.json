@@ -1,4 +1,8 @@
 { "name"                 : "template-definition-language",
+  "main"                 : "src/extension.js",
+  "activationEvents"     : [ "onCommand:extension.sayHello",
+                             "onWorkspaceOpened"  
+                           ],
   "displayName"          : "Template Definition Language Meta-Language Support",
   "publisher"            : "Dido Solutions",
   "description"          : "Template Definition Language (TDL) uses Meta-Commands to direct as TDL Processor in how to create output based on the input.",
@@ -15,8 +19,13 @@
   "files.associations"   : { "*.tdl"                 : "templateDL",
                              "*.template"            : "templateDL",
                              "*.templateDL"          : "templateDL",
-                             "*.code-workspace"      : "templateDL"
+                             "templateDL.code-workspace" : "templateDL"
                            },
+  "files"                : [ "out/**/*.js",
+                             "syntaxes/**/*.json",
+                             "themes/**/*.json",
+                             "templateDL.code-workspace"
+                           ],
   "contributes"          : { "languages"             : 
                               [ { "id"               : "templateDL",
                                   "aliases"          : ["TDL Programming Language", "templateDL", "TDL"],
