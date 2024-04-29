@@ -5,6 +5,10 @@
       "**/.DS_Store"      : true 
     },
     "cSpell.words"        : 
-    [ "Naur"
-    ]
+    [
+      "Naur",
+      "USERPROFILE",
+      "VSIX"
+    ],
+    "react-native-tools.networkInspector.consoleLogsColorTheme": "Dark"
 }

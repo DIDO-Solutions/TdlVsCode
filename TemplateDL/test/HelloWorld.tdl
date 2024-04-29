@@ -1,9 +1,26 @@
-This is a test
+_#ECHO INPUT TRUE The template statements are:
+_#ECHO OUTPUT NO
+_#SET ENVIRONMENT suppressBlanks true
+_#CURSOR myFriendsList CSV SELECT friendName FROM ./friends.csv
+
+This is a TemplateDL HelloWorld example:
+
+_#DEFINE myName Clem Kadiddlehopper
+
+Hello _&myName. how are you today _&startTimeStamp.
+Here is a list of my friends:
+_#LOOP MyFriendsList
+  * _&freindName::titleSnakeCase. 
+_#ENDLOOP
+
+_#EXIT 1 All done saying hello
+
+
 
 _#INCLUDE Templates/_&a.CommonDef.tdl a=b
 _#INCLUDE Templates/_&a.CommonDef.tdl a
 _#INCLUDE Templates/_&a.CommonDef.tdl b='test'
-_#INCLUDE Templates/_&a.CommonDef.tdl a=b a b='test 1 1' c="test 2" c=200 f=false
+_#INCLUDE Templates/_&a.CommonDef.tdl a=b a b='test _&1. 1' c="test 2" c=200 f=false
 
 test _&test::one. this is _&1. a test _&test::one.
 _&1.
@@ -38,7 +55,7 @@ _#SET myVariable::toLowerCase this is a test _&Java.
 _#SET TYPE 'Data/_&test::one._domains.csv'
 _#SET TYPE "Data/_<_&Target_Package_Name::LowerSnakeCase._<_domains.csv"
 _#SET TYPE `Data/_<_test_<_domains.csv`
-_#SET TYPE Data/_&1.domains.csv
+_#SET TYPE Data/_&1.domains.csv››
 
 _#SET TYPE _&1.
 _#SET TYPE _<Test (_&1::lower )._<

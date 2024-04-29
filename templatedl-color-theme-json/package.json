@@ -1,0 +1,21 @@
+{
+  "name": "templatedl-color-theme-json",
+  "displayName": "templateDL-color-theme.json",
+  "description": "The color theme for the templateDL extension",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "TemplateDL Dark Theme",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TemplateDL Dark Theme-color-theme.json"
+      }
+    ]
+  }
+}

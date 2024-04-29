@@ -1,7 +1,7 @@
 /**
  * File: extension.js
  * 
- * Copyright (c) 2024 by Dido Solutions. All rights reserved.
+ * Copyright  ( c ) 2024 by Dido Solutions. All rights reserved.
  *
  * **Prohibited Activities:**
  *
@@ -26,54 +26,43 @@
  * **Commercial Use:**
  *
  * * You cannot use this file for your business or profit without 
- *   Dido Solutions' consent (https://didosolutions.com/contact/).
+ *   Dido Solutions' consent  ( https://didosolutions.com/contact/ ).
  *
  * **Attribution Notice:**
  *
  * * You must retain this attribution notice in all copies of the file:
- * * Copyright (c) 2023 by Dido Solutions. All rights reserved.
+ * * Copyright  ( c ) 2023 by Dido Solutions. All rights reserved.
  */
 
 /**
- * The following is an overview of the extension.js file.
- * * Imports: The file starts with imports of necessary modules such as vscode, fs, and path.
- * * Constants: It defines three constants LOGGING_PROGRESS, LOGGING_INFO, and LOGGING_ERRORS, which control logging behavior for progress messages, informational messages, and error messages, respectively.
- * * Functions:
- * ** activate: This function is the entry point of the extension. It initializes the extension, reads and merges workspace files, and provides logging feedback to the user.
- * ** readWorkspaceContentFromFile: Reads workspace content from a file and returns an array of textMateRules.
- * ** getTextMateRules: Retrieves textMateRules from the provided workspace configuration.
- * ** mergeTextMateRules: Merges textMateRules from templateDLTextMateRules with localTextMateRules and updates the local workspace file.
- * ** isEqualRule: Checks if two textMateRules are equal based on the value of their scope.
- * ** updateLocalWorkspaceFile: Updates the local workspace file with the provided textMateRules.
- * ** logProgress, logInfo, logError: Logging functions to output progress messages, informational messages, and error messages, respectively.
- * Exports: The activate function is exported as the main function of the module.
- * Comments: Each function is documented using JSDoc comments to describe its purpose, parameters, and return values.
- * File Header: The file contains a comprehensive file header that includes copyright information, license terms, prohibited activities, and attribution notice.
+ * File: extension.js
  * 
- * The high-level logic is:
- * The steps used in the activate function to copy the templateDL.code-workspace textMateRules to the local workspace.code-workspace file:
- * 1. Check if the Current File is Part of a Workspace:
- *    - The function starts by checking if the current file is part of a workspace. This is done using vscode.workspace.workspaceFile.
- * 2. Read textMateRules from the templateDL.code-workspace File:
- *    - If the current file is part of a workspace, the function constructs the path to the templateDL.code-workspace file using path.join and context.extensionPath.
- *    - It then reads the contents of the templateDL.code-workspace file using the readWorkspaceContentFromFile function.
- * 3.Read textMateRules from the Local Workspace File:
- *    - After reading textMateRules from the template workspace file, the function reads the textMateRules from the local workspace file using vscode.workspace. workspaceFile.fsPath.
- * 4. Merge textMateRules:
- *    - If the filenames of the template workspace file and the local workspace file are different, it merges the textMateRules.
- *    - This merging process involves comparing textMateRules from both files and adding any new rules from the template workspace to the local workspace.
- * 5. Update Local Workspace File:
- *    - After merging textMateRules, the function updates the local workspace file with the merged textMateRules using the updateLocalWorkspaceFile function.
- * 6. Logging Feedback:
- *    - Throughout these steps, the function logs progress messages to provide feedback to the user about the activation process.
- * 7. Completion:
- *    - Finally, the function completes the activation process.
+ * This file serves as the main script for the TemplateDL extension. It provides functionality for setting up the extension, including executing a setup script, checking and updating workspace configurations, and handling activation and deactivation of the extension.
+ * 
+ * The extension activation process involves several steps:
+ * 1. Initialization: The extension initializes by checking whether the setup process has already been completed.
+ * 2. Setup Check: If setup is not completed, the extension proceeds with the setup process.
+ * 3. Workspace Configuration: The extension checks the existing workspace configuration to determine whether it contains the necessary settings. If not, it executes a setup script to update the configuration.
+ * 4. Reload Workspace: After completing the setup process successfully, the extension reloads the workspace to apply the updated configuration.
+ * 
+ * The extension deactivation process involves a single step:
+ * 1. Logging: The extension logs a message indicating that it has been deactivated.
+ * 
+ * @see {@link https://didosolutions.com/contact/} For any inquiries or support related to the TemplateDL extension, please contact Dido Solutions.
+ * 
+ * @copyright 2024 by Dido Solutions. All rights reserved.
+ * 
+ * @license This file is provided "as is" without warranty of any kind, expressed or implied. You are granted a non-exclusive, non-transferable license to use this file for personal, non-commercial purposes only.
+ * 
+ * @exports {activate} - The activate function initializes the extension and handles the activation process.
+ * @exports {deactivate} - The deactivate function handles the deactivation process of the extension.
  */
 
 //===== Imports
-const vscode      = require( 'vscode' );
-const fileSystem  = require( 'fs' );
-const path        = require( 'path' );
+const vscode        = require ( 'vscode' );
+const { execSync }  = require ( 'child_process' );
+const path          = require ( 'path' );
+const fs            = require ( 'fs' );
 
 //===== Constants
 /**
@@ -92,6 +81,17 @@ const LOGGING_INFO     = true;
  */
 const LOGGING_ERRORS   = true;
 
+//===== Global Variables
+/**
+ * Indicates whether the setup process for the TemplateDL extension has been completed.
+ * 
+ * This flag is used to track whether the setup process, which includes tasks such as
+ * creating or updating workspace files, has been completed. It is initially set to false
+ * and is set to true once the setup process is successfully completed.
+ * 
+ * @type {boolean}
+ */let setupCompleted     = false; // Flag to track whether setup has been completed
+
 //===== Functions
 
 //----- activate
@@ -103,197 +103,68 @@ const LOGGING_ERRORS   = true;
  * 
  * @param {vscode.ExtensionContext} context The extension context provided by VS Code.
  */
-function activate ( context ) 
-{ logProgress ( 'Starting the templateDL extension activation.');
-  // Check if the current file is part of a workspace
-  if ( vscode.workspace.workspaceFile ) 
-  { // Read textMateRules from templateDL.code-workspace file
-    const templateDLWorkspaceFilePath 
-      = path.join(context.extensionPath, 'templateDL.code-workspace' );
-    logProgress ( 'The templateDLWorkspaceFilePath is: ', 
-                  templateDLWorkspaceFilePath 
-                );
-    const templateDLTextMateRules 
-      = readWorkspaceContentFromFile ( templateDLWorkspaceFilePath );
-    // Read textMateRules from local workspace file
-    logProgress ( 'The read the templateDLTextMateRules are: ', 
-                  JSON.stringify ( templateDLTextMateRules ) 
-                );
-    const localWorkspaceFilePath 
-      = vscode.workspace.workspaceFile.fsPath;
-    const templateDLFilename = path.basename ( templateDLWorkspaceFilePath );
-    logProgress ( 'The templateDL filename is: ' + templateDLFilename );
-    const localFilename      = path.basename ( localWorkspaceFilePath );
-    logProgress ( 'The local filename is: ' + localFilename );
-    if ( templateDLFilename !== localFilename )
-    { const localTextMateRules 
-        = readWorkspaceContentFromFile ( localWorkspaceFilePath) ;
-      // Merge textMateRules
-      if ( templateDLTextMateRules.length > 0)
-      { mergeTextMateRules 
-          ( templateDLTextMateRules, 
-            localTextMateRules, 
-            localWorkspaceFilePath 
-          );
-      } // End if
-    } // end if
-    logProgress ( 'Finishing the templateDL extension activation.');
-  } // End if
-  else 
-  { logInfo ( 'The current file is not part of a workspace.');
-  } // end else
-} // end function activate
+async function activate ( context ) 
+{ logProgress ( 'Starting to activate the TemplateDL extension' );
+  if  ( !setupCompleted ) {
+    const extensionPath = context.extensionPath;
+    const templateDLWorkspaceFilePath = path.join ( extensionPath, 'templateDL.code-workspace' );
+    try 
+    { logInfo ( 'Starting TemplateDL setup...' );
+      const workspaceFolders = vscode.workspace.workspaceFolders;
+      if  ( !workspaceFolders || workspaceFolders.length === 0 ) 
+      { vscode.window.showErrorMessage ( 'No workspace folder found.' );
+        logProgress ( 'Finishing activate the TemplateDL extension(1)' );
+        return;
+      } // End if workspaceFolders
+      console.log ('###### ' );
+      const workspaceUri = workspaceFolders[0].uri;
+      logInfo ( 'Working folder: ' + workspaceUri );
+      const localWorkSpacePath = vscode.Uri.joinPath ( workspaceUri, 'workspace.code-workspace' );
+      const workspaceExists = await vscode.workspace.fs.stat ( localWorkSpacePath )
+        .then (  (  ) => true )
+        .catch (  (  ) => false );
+      if  ( workspaceExists ) 
+      { logInfo ( 'Reading existing file: ' + localWorkSpacePath.fsPath  );
+        const workspaceContents = fs.readFileSync ( localWorkSpacePath.fsPath, 'utf-8' );
+        const linesOfCode = workspaceContents.split(/\r?\n/).length;
+        logInfo ( 'lines Of JSON read are: ' + linesOfCode );
+        if  ( workspaceContents.includes ( 'templateDL' ) ) {
+          logInfo ( 'Existing workspace.code-workspace file used(2)' );
+          await vscode.workspace.updateWorkspaceFolders ( workspaceFolders.length, null, { uri: workspaceUri } );
+          logProgress ( 'Finishing activate the TemplateDL extension' );
+          return;
+        } // End if includes
+      } // End if workspaceExists
+      const setupScript = path.join ( extensionPath, 'src', 'setupTemplateDL.sh' );
+      const setupScriptCmd = `sh ${setupScript} ${templateDLWorkspaceFilePath} ${localWorkSpacePath.fsPath} 2>&1`;
+      logInfo ( 'Setup script command:', setupScriptCmd );
+      const output = execSync ( setupScriptCmd, { encoding: 'utf-8' } );
+      logInfo ( 'Output:', output );
+      logInfo ( 'Reloading the workspace...' );
+      await vscode.commands.executeCommand ( 'vscode.openFolder', localWorkSpacePath, false );
+    } // End try
+    catch  ( error ) 
+    { const errorMessage = error.output ? error.output : error.message;
+      logError ( 'Output: ' + errorMessage );
+      vscode.window.showErrorMessage ( `Error setting up TemplateDL: ${errorMessage}` );
+    } // End catch
+    logProgress ( 'Finishing to activate the TemplateDL extension(3)' );
+    const document = await vscode.workspace.openTextDocument ( vscode.Uri.file ( extensionPath ) );
+    await vscode.window.showTextDocument ( document );
+  } // End if setupCompleted
+} // End function activate
 
-//----- readWorkspaceContentFromFile
 /**
- * Reads workspace content from a file.
+ * Deactivates the TemplateDL extension.
  * 
- * @param {string} filePath - The path to the file to read.
- * @returns {Array} An array of textMateRules read from the file.
+ * This function is called when the extension is deactivated or unloaded.
+ * It logs a message indicating that the extension has been deactivated.
  */
-function readWorkspaceContentFromFile ( filePath )
-{ logProgress ( 'Starting to readWorkspaceContentFromFile: ' 
-                 + filePath 
-              );
-  let textMateRules = [];
-  try 
-  { const content
-     = fileSystem.readFileSync ( filePath, 'utf8' );
-    const linesOfCode = content.split(/\r?\n/).length;
-    logProgress ( 'lines Of Code read are: ' + linesOfCode );
-    const workspaceConfig 
-      = JSON.parse ( content );
-    logProgress ( 'The contents of the workspaceConfig are: ' 
-                  + JSON.stringify ( workspaceConfig ) 
-                );
-    textMateRules = getTextMateRules ( workspaceConfig );
-    logProgress ( 'Finishing loading textMateRules: ' 
-                  + JSON.stringify ( textMateRules ) 
-                );
-  } // End try
-  catch ( error ) 
-  { logError ( 'Error reading textMateRules from file:', error);
-  } // End catch
-  return textMateRules;
-} // End function function readWorkspaceContentFromFile
+function deactivate (  ) 
+{ logProgress  (  'TemplateDL extension has been deactivated!' );
+  setupCompleted = false; // Reset the setupCompleted flag
+} // End function deactivate
 
-//----- getTextMateRules
-/**
- * Retrieves textMateRules from the provided workspace configuration.
- * 
- * @param {Object} workspaceConfig - The workspace configuration object.
- * @returns {Array} An array of textMateRules extracted from the workspace configuration.
- */
-function getTextMateRules ( workspaceConfig ) 
-{ logProgress ( 'Starting to get the texMateRules' );
-  let textMateRules = [];
-  // Check if tokenColorCustomizations is defined
-  const tokenColorCustomizations = workspaceConfig?.settings?.['editor.tokenColorCustomizations'];
-  const rules                    = tokenColorCustomizations?.['[*]']?.textMateRules;
-  const editorTextMateRules      = workspaceConfig?.settings?.editor?.textMateRules;
-  if ( rules ) 
-  { Object.keys ( rules ).forEach
-      ( key => 
-          { const rule = rules [ key ];
-            logProgress ( 'Adding new templateDL rule: ' + JSON.stringify ( rule ) );
-            textMateRules.push ( rule );
-          } // End key
-      );
-  } // End if
-  // Check if textMateRules is defined directly under editor
-  else if ( editorTextMateRules ) 
-  { textMateRules = textMateRules.concat ( editorTextMateRules );
-  } // End else if
-  logProgress ( 'Finishing getting the textNateRules' );
-  return textMateRules;
-} // End function getTextMateRules
-
-//----- mergeTextMateRules
-/**
- * Merges textMateRules from templateDLTextMateRules with localTextMateRules and updates the local workspace file.
- * 
- * @param {Array} templateDLTextMateRules - An array of textMateRules from the templateDL workspace.
- * @param {Array} localTextMateRules - An array of textMateRules from the local workspace.
- * @param {string} localWorkspaceFilePath - The file path of the local workspace.
- */
-function mergeTextMateRules
-  ( templateDLTextMateRules, localTextMateRules, localWorkspaceFilePath ) 
-{ logProgress ( 'Starting to mergeTextMateRules' );
-  const mergedTextMateRules = [...localTextMateRules];
-  // Check if each rule from templateDLTextMateRules exists in localTextMateRules
-  for ( const rule of templateDLTextMateRules ) 
-  { if ( !localTextMateRules.some
-      ( existingRule => isEqualRule ( existingRule, rule ) ) ) 
-    { // Add rule to mergedTextMateRules if it doesn't exist
-      logInfo ( 'Adding textMateScope: ', rule.scope );
-      mergedTextMateRules.push( rule );
-    } // End if
-  } // End for rule
-  // Update local workspace file with merged textMateRules
-  updateLocalWorkspaceFile 
-    ( mergedTextMateRules, 
-      localWorkspaceFilePath
-    );
-  logProgress('Finishing mergeTextMateRules ');
-} // End function mergeTextMateRules
-
-//----- isEqualRule
-/**
- * Checks if two textMateRules are equal based on the value of their scope.
- * 
- * @param {Object} rule1 - The first textMateRule object.
- * @param {Object} rule2 - The second textMateRule object.
- * @returns {boolean} Returns true if the scopes of the two rules are equal, otherwise false.
- */
-function isEqualRule 
-  ( rule1, 
-    rule2 
-  ) 
-{ const localResult = rule1["scope"] === rule2["scope"];
-  return localResult;
-} // End function isEqualRule
-
-//----- updateLocalWorkspaceFile
-/**
- * Updates the local workspace file with the provided textMateRules.
- * 
- * @param {Object[]} textMateRules - An array of textMateRule objects to be updated in the workspace file.
- * @param {string} localWorkspaceFilePath - The file path of the local workspace file to be updated.
- */
-function updateLocalWorkspaceFile
-  ( textMateRules, 
-    localWorkspaceFilePath
-  ) 
-{ logProgress ( 'Starting to updateLocalWorkspaceFile: '
-                + localWorkspaceFilePath
-              );
-  try 
-  { const content            = fileSystem.readFileSync 
-                               ( localWorkspaceFilePath, 
-                                 'utf8' 
-                               );
-    const workspaceConfig    = JSON.parse(content);
-    workspaceConfig.settings = workspaceConfig.settings 
-                               || {};
-    workspaceConfig.settings.editor.tokenColorCustomizations 
-                             = workspaceConfig.settings.editor.tokenColorCustomizations 
-                               || {};
-    workspaceConfig.settings.editor.tokenColorCustomizations["[*]"] 
-                             = { textMateRules: textMateRules };
-    fileSystem.writeFileSync
-      ( localWorkspaceFilePath, 
-        JSON.stringify ( workspaceConfig, 
-                         null, 
-                         2
-                       ), 
-        'utf8'
-      );
-  }  // End try
-  catch ( error ) 
-  { logError ( 'Error updating local workspace file:', error );
-  } // End catch
-  logProgress ( 'Finishing the updateLocalWorkspaceFile' );
-} // End function updateLocalWorkspaceFile
 
 //----- logProgress
 /**
@@ -301,9 +172,9 @@ function updateLocalWorkspaceFile
  * 
  * @param {string} text - The text message to log.
  */
-function logProgress ( text )
-{ if ( LOGGING_PROGRESS ) 
-  { console.log ( '--   ' + text );
+function logProgress  (  text  )
+{ if  (  LOGGING_PROGRESS  ) 
+  { console.log  (  '---- ' + text  );
   } // End if 
 } // End function logProgress
 
@@ -313,9 +184,9 @@ function logProgress ( text )
  * 
  * @param {string} text - The information text to log.
  */
-function logInfo ( text )
-{ if ( LOGGING_INFO ) 
-  { console.log ( '--++ ' + text );
+function logInfo  (  text  )
+{ if  (  LOGGING_INFO  ) 
+  { console.log  (  '--++ ' + text  );
   } // End if 
 } // End function logInfo
 
@@ -325,9 +196,10 @@ function logInfo ( text )
  * 
  * @param {string} text - The error message to log.
  */
-function logError ( text )
-{ if ( LOGGING_ERRORS ) 
-  { console.log ( '--** ' + text );
+function logError  (  text  )
+{ if  (  LOGGING_ERRORS  ) 
+  { console.log  (  '--** ' + text  );
+    console.error  (  '--** ' + text  );
   } // End if 
 } // End function logError
 
@@ -336,4 +208,7 @@ function logError ( text )
  * This exporting a single function named activate from the module. This means that when another module imports this module using require, it can access the activate function and use it.
  *
  */
-module.exports = { activate };
+module.exports = 
+{ activate,
+  deactivate
+};

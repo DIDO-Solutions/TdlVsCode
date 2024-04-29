@@ -1,21 +1,21 @@
 { "name"                 : "template-definition-language",
-  "main"                 : "src/extension.js",
+  "main"                 : "./src/extension.js",
   "activationEvents"     : [ "onCommand:extension.sayHello",
                              "onWorkspaceOpened"  
                            ],
-  "displayName"          : "Template Definition Language Meta-Language Support",
-  "publisher"            : "Dido Solutions",
-  "description"          : "Template Definition Language (TDL) uses Meta-Commands to direct as TDL Processor in how to create output based on the input.",
+  "displayName"          : "TemplateDL",
+  "publisher"            : "DidoSolutions",
+  "description"          : "Template Definition Language (templateDL) supports the use of the Template Definition Language as defined by Jackrabbit Consulting.",
   "version"              : "0.9.0",
   "repository"           : "https://github.com/DIDO-Solutions/TdlVsCode/tree/ebd2f815c949db856fade0c196aa8b77cd0e766b/TemplateDL",
   "devDependencies"      : { "vscode"                : "^1.85.1",
                              "vsce"                  : "^1.108.0"
                            },
-  "scripts"              : { "package"               : "vsce package" },
+  "scripts"              : { "package"               : "mkdir -p releases && vsce package --out releases" },
   "engines"              :  { "vscode"               : "^1.85.1",
                               "node"                 : "^16.17.0" 
                             },
-  "categories"           : [ "Programming Languages"],
+  "categories"           : [ "Programming Languages", "Themes" ],
   "files.associations"   : { "*.tdl"                 : "templateDL",
                              "*.template"            : "templateDL",
                              "*.templateDL"          : "templateDL",
@@ -24,13 +24,14 @@
   "files"                : [ "out/**/*.js",
                              "syntaxes/**/*.json",
                              "themes/**/*.json",
-                             "templateDL.code-workspace"
+                             "templateDL.code-workspace",
+                             "./src/setupTemplateDL.sh"
                            ],
   "contributes"          : { "languages"             : 
                               [ { "id"               : "templateDL",
                                   "aliases"          : ["TDL Programming Language", "templateDL", "TDL"],
                                   "extensions"       : ["templateDL", "template", "tdl"],
-                                  "configuration"    : "./language-configuration.json"
+                                  "configuration"    : "language-configuration.json"
                                 }
                               ],
                               "grammars"             : 
@@ -44,6 +45,14 @@
                             [ { "label"              : "TemplateDL Dark Theme",
                                 "uiTheme"            : "vs-dark",
                                 "path"               : "./themes/templateDL-theme-dark.json"
+                              },
+                              { "label"              : "TemplateDL Light Theme",
+                                "uiTheme"            : "vs",
+                                "path"               : "./themes/templateDL-theme-light.json"
+                              },
+                              { "label"              : "myTheme",
+                                "uiTheme"            : "dark",
+                                "path"               : "./themes/myTheme-color-theme.json"
                               }
                           ],
                           "snippets" :
@@ -51,5 +60,5 @@
                               "path"                   : "./snippets/templateDL-snippet.json"
                             }
                           ],
-    "configuration"                                  : "./.vscode/settings.json"
+    "configuration"                                  : ".vscode/settings.json"
 }

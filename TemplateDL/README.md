@@ -53,7 +53,7 @@ No new features.
         ```
       * Using NodeJS
         ```
-        npm run package
+        npm run package --output-path releases
         ```
 2. Optional Local Installation
       To test the extension before publishing, run:
