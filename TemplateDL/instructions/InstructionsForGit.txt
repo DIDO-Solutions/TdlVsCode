@@ -29,3 +29,20 @@ Steps:
 3. git add --all
 4. git commit -am "message"
 5. git push
+
+
+1697  git checkout main
+ 1698  git merge development
+ 1699  git lg
+ 1700  git br
+ 1701  git branch
+ 1702  git push origin main
+ 1703  git push origin development
+ 1704  git lg
+ 1705  git checkout development
+ 1706  git lg
+ 1707  code.
+ 1708  code 
+ 1709  code .
+ 1710  pwd
+ 1711  code .
